@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const pinModel = require("./pin");
 
 mongoose
   .connect("mongodb+srv://admin:mapapp@calpolycluster.m4ncq.mongodb.net/myFirstDatabase", {
@@ -16,16 +17,16 @@ mongoose
 //   }
 // }
 
-// async function addPin(pin) {
-//   try {
-//     const pinToAdd = new pinModel(pin);
-//     const savedPin = await pinToAdd.save();
-//     return savedPin;
-//   } catch (error) {
-//     console.log(error);
-//     return false;
-//   }
-// }
+async function addPin(pin) {
+  try {
+    const pinToAdd = new pinModel(pin);
+    const savedPin = await pinToAdd.save();
+    return savedPin;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
 
 // async function findPinByTitle(title) {
 //   return await pinModel.find({ title: title });
@@ -47,7 +48,7 @@ mongoose
 //   return await pinModel.find({ pinState: pinState });
 // }
 
-// exports.addPin = addPin;
+exports.addPin = addPin;
 // exports.findPinById = findPinById;
 // exports.findPinByTitle = findPinByTitle;
 // exports.findPinByLocation = findPinByLocation;
