@@ -1,4 +1,6 @@
 const express = require("express");
+// const cors = require('cors');
+const pinModel = require("./models/pin-services");
 const app = express();
 const port = 5000;
 
