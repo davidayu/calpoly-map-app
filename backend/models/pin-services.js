@@ -8,15 +8,6 @@ mongoose
   })
   .catch((error) => console.log(error));
 
-// async function findPinById(id) {
-//   try {
-//     return await pinModel.findById(id);
-//   } catch (error) {
-//     console.log(error);
-//     return undefined;
-//   }
-// }
-
 async function addPin(pin) {
   try {
     const pinToAdd = new pinModel(pin);
@@ -28,30 +19,35 @@ async function addPin(pin) {
   }
 }
 
-// async function findPinByTitle(title) {
-//   return await pinModel.find({ title: title });
-// }
+async function getPins(x, y, z) {
+  let result;
+  if (x === undefined || y === undefined || z == undefined) {
+    result = await pinModel.find();
+  } else {
+      result = await findPinByCoords(x, y, z);
+  }   
+  return result;  
+}
 
-// async function findPinByLocation(location) {
-//   return await pinModel.find({ location: location });
-// }
+async function findPinByCoords(x, y, z) {
+  return await pinModel.find({'x': x, 'y': y, 'z': z});
+}
 
-// async function findPinByType(type) {
-//   return await pinModel.find({ type: type });
-// }
+async function findPinById(id) {
+  try {
+      return await pinModel.findById(id);
+  } catch(error) {
+      console.log(error);
+      return undefined;
+  }
+}
 
-// async function findIndoorPins(indoor) {
-//   return await pinModel.find({ indoor: indoor });
-// }
-
-// async function findPinByState(indoor) {
-//   return await pinModel.find({ pinState: pinState });
-// }
+async function removePin(id) {
+  return await pinModel.findByIdAndDelete({'_id':id});
+}
 
 exports.addPin = addPin;
-// exports.findPinById = findPinById;
-// exports.findPinByTitle = findPinByTitle;
-// exports.findPinByLocation = findPinByLocation;
-// exports.findPinByType = findPinByType;
-// exports.findIndoorPins = findIndoorPins;
-// exports.findPinByState = findPinByState;
+exports.getPins = getPins;
+exports.findPinByCoords = findPinByCoords;
+exports.removePin = removePin;
+exports.findPinById = findPinById;
