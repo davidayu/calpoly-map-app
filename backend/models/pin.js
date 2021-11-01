@@ -48,6 +48,7 @@ const pinSchema = new mongoose.Schema({
     default: 'NEW',
     trim: true,
   }, 
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Pin = mongoose.model("Pin", pinSchema);
