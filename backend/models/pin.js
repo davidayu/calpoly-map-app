@@ -47,7 +47,7 @@ const pinSchema = new mongoose.Schema({
     enum: ['NEW', 'MINIMIZED', 'MAXIMIZED'],
     default: 'NEW',
     trim: true,
-  }, 
+  },
 });
 
 const Pin = mongoose.model("Pin", pinSchema);
