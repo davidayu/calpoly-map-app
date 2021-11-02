@@ -33,7 +33,7 @@ async function getPins(x, y) {
 }
 
 async function findPinByCoords(x, y) {
-  return await pinModel.find({ x: x, y: y});
+  return await pinModel.find({ x: x, y: y });
 }
 
 async function findPinById(id) {
