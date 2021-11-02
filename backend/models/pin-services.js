@@ -33,7 +33,7 @@ async function getPins(x, y) {
 }
 
 async function findPinByCoords(x, y) {
-  return await pinModel.find({ x: x, y: y});
+  return await pinModel.find({ x: x, y: y });
 }
 
 async function findPinById(id) {
@@ -49,8 +49,34 @@ async function removePin(id) {
   return await pinModel.findByIdAndDelete({ _id: id });
 }
 
+async function upvotePin(id) {
+  let result;
+  try {
+    result = await pinModel.findById(id);
+    result.upvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function downvotePin(id) {
+  let result;
+  try {
+    result = await pinModel.findById(id);
+    result.downvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
 exports.removePin = removePin;
 exports.findPinById = findPinById;
+exports.upvotePin = upvotePin;
+exports.downvotePin = downvotePin;

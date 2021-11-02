@@ -33,8 +33,8 @@ const pinSchema = new mongoose.Schema({
   },
   pinType: {
     type: String,
-    enum: ['STUDY', 'ART', 'DINING', 'NONE'],
-    default: 'NONE',
+    enum: ["STUDY", "ART", "DINING", "NONE"],
+    default: "NONE",
     trim: true,
   },
   indoor: {
@@ -44,8 +44,8 @@ const pinSchema = new mongoose.Schema({
   },
   pinState: {
     type: String,
-    enum: ['NEW', 'MINIMIZED', 'MAXIMIZED'],
-    default: 'NEW',
+    enum: ["NEW", "MINIMIZED", "MAXIMIZED"],
+    default: "NEW",
     trim: true,
   },
 });

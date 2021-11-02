@@ -38,6 +38,26 @@ app.delete("/pins/:id", async (req, res) => {
   }
 });
 
+app.put("/pins/upvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let pin = await pinServices.findPinById(id);
+  if (pin === undefined) res.status(404).send("Pin not found.");
+  else {
+    await pinServices.upvotePin(id);
+    res.status(204).end();
+  }
+});
+
+app.put("/pins/downvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let pin = await pinServices.findPinById(id);
+  if (pin === undefined) res.status(404).send("Pin not found.");
+  else {
+    await pinServices.downvotePin(id);
+    res.status(204).end();
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
