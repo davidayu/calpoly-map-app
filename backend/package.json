@@ -4,7 +4,9 @@
   "description": "https://www.figma.com/file/sQ51YyO4PbaaNVh6xXr76p/Map-UI-Mock-up?node-id=0%3A1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "prettier --check .",
+    "dev": "nodemon backend_with_db.js",
+    "start": "node backend_with_db.js"
   },
   "repository": {
     "type": "git",
