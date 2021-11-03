@@ -11,6 +11,10 @@ on:
     branches: 
       - "*"
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
   build:
     runs-on: ubuntu-latest
