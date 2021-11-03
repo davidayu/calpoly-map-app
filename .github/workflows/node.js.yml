@@ -13,8 +13,7 @@ on:
 
 defaults:
   run:
-    working-directory: web
-
+    working-directory: backend
 jobs:
   build:
     runs-on: ubuntu-latest
