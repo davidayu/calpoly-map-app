@@ -1,10 +1,10 @@
+const dotenv = require('dotenv').config({ path: 'database.env' })
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
 
+const uri = process.env.DB_URI;
 mongoose
-  .connect(
-    "mongodb+srv://admin:mapapp@calpolycluster.m4ncq.mongodb.net/myFirstDatabase",
-    {
+  .connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
