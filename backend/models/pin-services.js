@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config({ path: 'database.env' })
+const dotenv = require("dotenv").config({ path: "database.env" });
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
 
@@ -7,8 +7,7 @@ mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }
-  )
+  })
   .catch((error) => console.log(error));
 
 async function addPin(pin) {
