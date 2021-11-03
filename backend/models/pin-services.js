@@ -23,18 +23,18 @@ async function addPin(pin) {
   }
 }
 
-async function getPins(x, y) {
+async function getPins(lat, lon) {
   let result;
-  if (x === undefined || y === undefined) {
+  if (lat === undefined || lon === undefined) {
     result = await pinModel.find();
   } else {
-    result = await findPinByCoords(x, y);
+    result = await findPinByCoords(lat, lon);
   }
   return result;
 }
 
-async function findPinByCoords(x, y) {
-  return await pinModel.find({ x: x, y: y });
+async function findPinByCoords(lat, lon) {
+  return await pinModel.find({ lat: lat, lon: lon });
 }
 
 async function findPinById(id) {
