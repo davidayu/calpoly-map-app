@@ -5,9 +5,9 @@ const pinModel = require("./pin");
 const uri = process.env.DB_URI;
 mongoose
   .connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
   )
   .catch((error) => console.log(error));
 
