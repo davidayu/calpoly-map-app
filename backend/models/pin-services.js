@@ -1,6 +1,6 @@
-const dotenv = require('dotenv').config({ path: '../.env' })
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
+require('dotenv').config({ path: __dirname + '/../../frontend/.env'})
 
 const uri = process.env.DB_URI;
 
