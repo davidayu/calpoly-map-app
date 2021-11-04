@@ -12,9 +12,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pins", async (req, res) => {
-  const x = req.query.x;
-  const y = req.query.y;
-  let result = await pinServices.getPins(x, y);
+  const lat = req.query.lat;
+  const lon = req.query.lon;
+  let result = await pinServices.getPins(lat, lon);
   result = { pins_list: result };
   res.send(result);
 });

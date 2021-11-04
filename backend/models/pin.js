@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const pinSchema = new mongoose.Schema({
-  x: {
+  lat: {
     type: Number,
     required: true,
     trim: true,
   },
-  y: {
+  lon: {
     type: Number,
     required: true,
     trim: true,
