@@ -72,6 +72,16 @@ async function downvotePin(id) {
   }
 }
 
+async function findPinByLocation(title) {
+  let result;
+  if (title === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ title: title });
+  }
+  return result;
+}
+
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
@@ -79,3 +89,4 @@ exports.removePin = removePin;
 exports.findPinById = findPinById;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
+exports.findPinByLocation = findPinByLocation;

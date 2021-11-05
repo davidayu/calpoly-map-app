@@ -86,6 +86,13 @@ app.get("/comments", async (req, res) => {
   res.send(result);
 });
 
+app.get("/pins/:title", async (req, res) => {
+  const title = req.params.title;
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
+  res.send(result);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
