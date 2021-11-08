@@ -1,14 +1,13 @@
+const dotenv = require("dotenv").config({ path: "database.env" });
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
 
+const uri = process.env.DB_URI;
 mongoose
-  .connect(
-    "mongodb+srv://admin:mapapp@calpolycluster.m4ncq.mongodb.net/myFirstDatabase",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((error) => console.log(error));
 
 async function addPin(pin) {
@@ -45,7 +44,7 @@ async function findPinByLocation(title) {
 }
 
 async function findPinByCoords(lat, lon) {
-  return await pinModel.find({ lat: lat, lon: lon});
+  return await pinModel.find({ lat: lat, lon: lon });
 }
 
 async function findPinById(id) {
@@ -61,9 +60,46 @@ async function removePin(id) {
   return await pinModel.findByIdAndDelete({ _id: id });
 }
 
+async function upvotePin(id) {
+  let result;
+  try {
+    result = await pinModel.findById(id);
+    result.upvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function downvotePin(id) {
+  let result;
+  try {
+    result = await pinModel.findById(id);
+    result.downvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function findPinByLocation(title) {
+  let result;
+  if (title === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ title: title });
+  }
+  return result;
+}
+
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
 exports.removePin = removePin;
 exports.findPinById = findPinById;
+exports.findPinByLocation = findPinByLocation;
+exports.upvotePin = upvotePin;
+exports.downvotePin = downvotePin;
 exports.findPinByLocation = findPinByLocation;

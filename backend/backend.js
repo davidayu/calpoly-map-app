@@ -67,10 +67,37 @@ app.delete("/comments/:id", async (req, res) => {
   }
 });
 
+app.put("/pins/upvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let pin = await pinServices.findPinById(id);
+  if (pin === undefined) res.status(404).send("Pin not found.");
+  else {
+    await pinServices.upvotePin(id);
+    res.status(204).end();
+  }
+});
+
+app.put("/pins/downvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let pin = await pinServices.findPinById(id);
+  if (pin === undefined) res.status(404).send("Pin not found.");
+  else {
+    await pinServices.downvotePin(id);
+    res.status(204).end();
+  }
+});
+
 app.get("/comments", async (req, res) => {
   const id = req.query.id;
   let result = await commentServices.getComments(id);
   result = { comment: result };
+  res.send(result);
+});
+
+app.get("/pins/:title", async (req, res) => {
+  const title = req.params.title;
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
   res.send(result);
 });
 
