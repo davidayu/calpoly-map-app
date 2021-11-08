@@ -45,7 +45,33 @@ async function removeComment(id) {
   return await commentModel.findByIdAndDelete({ _id: id });
 }
 
+async function upvoteComment(id) {
+  let result;
+  try {
+    result = await commentModel.findById(id);
+    result.upvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function downvoteComment(id) {
+  let result;
+  try {
+    result = await commentModel.findById(id);
+    result.downvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
 exports.addComment = addComment;
 exports.getComments = getComments;
 exports.removeComment = removeComment;
 exports.findCommentById = findCommentById;
+exports.upvoteComment = upvoteComment;
+exports.downvoteComment = downvoteComment;
