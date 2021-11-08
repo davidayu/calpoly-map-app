@@ -83,16 +83,6 @@ async function downvotePin(id) {
   }
 }
 
-async function findPinByLocation(title) {
-  let result;
-  if (title === undefined) {
-    result = await pinModel.find();
-  } else {
-    result = await pinModel.find({ title: title });
-  }
-  return result;
-}
-
 async function filterByType(pinType) {
   let result;
   if (pinType === undefined) {
@@ -111,5 +101,4 @@ exports.findPinById = findPinById;
 exports.findPinByLocation = findPinByLocation;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
-exports.findPinByLocation = findPinByLocation;
 exports.filterByType = filterByType;
