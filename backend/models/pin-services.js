@@ -32,6 +32,18 @@ async function getPins(lat, lon) {
   return result;
 }
 
+async function findPinByLocation(title) {   
+  let result;   
+  if (title === undefined) {     
+    result = await pinModel.find();   
+  } 
+    else {     
+      result = await pinModel.find({title: new RegExp(title)});
+      // result = await pinModel.find({title: {$regex: /mm/}});   
+  }   
+  return result; 
+}
+
 async function findPinByCoords(lat, lon) {
   return await pinModel.find({ lat: lat, lon: lon});
 }
@@ -54,3 +66,4 @@ exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
 exports.removePin = removePin;
 exports.findPinById = findPinById;
+exports.findPinByLocation = findPinByLocation;

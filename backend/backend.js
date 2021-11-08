@@ -3,7 +3,7 @@ const cors = require("cors");
 const pinServices = require("./models/pin-services");
 const commentServices = require("./models/comment-services");
 const app = express();
-const port = 5000;
+const port = 8124;
 
 app.use(express.json());
 
@@ -28,6 +28,14 @@ app.post("/pins", async (req, res) => {
     res.status(500).end();
   }
 });
+
+app.get("/pins/:title", async (req, res) => {
+  const title = req.params.title;
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
+  res.send(result);
+});
+
 
 app.delete("/pins/:id", async (req, res) => {
   const id = req.params["id"];
