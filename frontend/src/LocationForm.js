@@ -12,6 +12,7 @@ function LocationForm() {
 
    function handleMapClick(pos) {
       setPosition(pos);
+      console.log(process.env.REACT_APP_API_HOST);
    }
 
    function handleChange(event) {
