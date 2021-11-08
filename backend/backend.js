@@ -58,6 +58,16 @@ app.put("/pins/downvote/:id", async (req, res) => {
   }
 });
 
+app.get("/pins/:type", async (req, res) => {
+  const pinType = req.params["type"];
+  let result = await pinServices.filterByType(pinType);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send(result);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
