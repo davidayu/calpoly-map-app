@@ -11,9 +11,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pins", async (req, res) => {
-  const x = req.query.x;
-  const y = req.query.y;
-  let result = await pinServices.getPins(x, y);
+  const lat = req.query.lat;
+  const lon = req.query.lon;
+  let result = await pinServices.getPins(lat, lon);
   result = { pins_list: result };
   res.send(result);
 });
@@ -60,4 +60,13 @@ app.put("/pins/downvote/:id", async (req, res) => {
 
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
+
+app.get("/pins/:type", async (req, res) => {
+  const pinType = req.params["type"];
+  let result = await pinServices.filterByType(pinType);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send(result);
+  }
 });
