@@ -5,15 +5,13 @@ name: Node.js CI
 
 on:
   push:
-    branches: 
-      - "*"
+    branches: [main, with-subfolder]
   pull_request:
-    branches: 
-      - "*"
+    branches: [main, with-subfolder]
 
 defaults:
   run:
-    working-directory: ./backend
+    working-directory: backend
 
 jobs:
   build:
@@ -39,4 +37,4 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "calpoly-map-app"
-          heroku_email: "bcdasilv@calpoly.edu"
+          heroku_email: "nomarx@calpoly.edu"
