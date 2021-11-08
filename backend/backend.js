@@ -36,7 +36,6 @@ app.get("/pins/:title", async (req, res) => {
   res.send(result);
 });
 
-
 app.delete("/pins/:id", async (req, res) => {
   const id = req.params["id"];
   let pin = await pinServices.findPinById(id);

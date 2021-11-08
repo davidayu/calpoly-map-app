@@ -31,16 +31,15 @@ async function getPins(lat, lon) {
   return result;
 }
 
-async function findPinByLocation(title) {   
-  let result;   
-  if (title === undefined) {     
-    result = await pinModel.find();   
-  } 
-    else {     
-      result = await pinModel.find({title: new RegExp(title)});
-      // result = await pinModel.find({title: {$regex: /mm/}});   
-  }   
-  return result; 
+async function findPinByLocation(title) {
+  let result;
+  if (title === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ title: new RegExp(title) });
+    // result = await pinModel.find({title: {$regex: /mm/}});
+  }
+  return result;
 }
 
 async function findPinByCoords(lat, lon) {
@@ -93,7 +92,6 @@ async function findPinByLocation(title) {
   }
   return result;
 }
-
 
 async function filterByType(pinType) {
   let result;

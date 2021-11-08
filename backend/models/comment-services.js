@@ -1,18 +1,14 @@
 const mongoose = require("mongoose");
 const commentModel = require("./comment");
 const pinModel = require("./pin");
-const dotenv = require('dotenv').config({ path: 'database.env' })
-
+const dotenv = require("dotenv").config({ path: "database.env" });
 
 const uri = process.env.DB_URI;
 mongoose
-  .connect(
-    uri,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((error) => console.log(error));
 
 async function addComment(comment) {

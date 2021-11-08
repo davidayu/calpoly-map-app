@@ -7,13 +7,13 @@
 //    const [indoor, setIndoor] = useState(false);
 
 //    function handleChange(event) {
-      
+
 //    }
 
 //    return (
 //       <form>
 //          <label htmlFor="title"> Location Name </label>
-//          <input 
+//          <input
 //             type="text"
 //             id="title"
 //             name="title"
@@ -22,7 +22,7 @@
 //          />
 //          <br />
 //          <label htmlFor="description"> Location Description </label>
-//          <textarea 
+//          <textarea
 //             id="description"
 //             name="description"
 //             value={description}
@@ -35,7 +35,7 @@
 //             id="indoor"
 //             name="indoor"
 //             checked={indoor}
-//             onChange={handleChange} 
+//             onChange={handleChange}
 //          />
 //       </form>
 //    );
