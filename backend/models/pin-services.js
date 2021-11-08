@@ -94,6 +94,17 @@ async function findPinByLocation(title) {
   return result;
 }
 
+
+async function filterByType(pinType) {
+  let result;
+  if (pinType === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ pinType: pinType });
+  }
+  return result;
+}
+
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
@@ -103,3 +114,4 @@ exports.findPinByLocation = findPinByLocation;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
 exports.findPinByLocation = findPinByLocation;
+exports.filterByType = filterByType;
