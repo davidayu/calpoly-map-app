@@ -58,9 +58,6 @@ app.put("/pins/downvote/:id", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || port, () => {
-  console.log("REST API is listening.");
-
 app.get("/pins/:type", async (req, res) => {
   const pinType = req.params["type"];
   let result = await pinServices.filterByType(pinType);
@@ -69,4 +66,8 @@ app.get("/pins/:type", async (req, res) => {
   else {
     res.send(result);
   }
+});
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });
