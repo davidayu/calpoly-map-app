@@ -12,7 +12,6 @@ function LocationForm() {
 
    function handleMapClick(pos) {
       setPosition(pos);
-      console.log(process.env.REACT_APP_API_HOST);
    }
 
    function handleChange(event) {
@@ -25,18 +24,6 @@ function LocationForm() {
          setIndoor(!indoor);
       else if (name === 'type')
          setType(value);
-   }
-
-   async function postPin(pin) {
-      try {
-         console.log(process.env.REACT_APP_API_HOST);
-         const response = await axios.post(`${process.env.REACT_APP_API_HOST}/pins`, pin);
-         return response;
-      }
-      catch (error) {
-         console.log(error);
-         return false;
-      }
    }
 
    function handleSubmission() {
@@ -52,7 +39,8 @@ function LocationForm() {
             pinType: type,
             indoor: indoor,
          };
-         postPin(newPin).then((response) => {
+         axios.post(`${process.env.REACT_APP_API_HOST}/pins`, newPin)
+         .then((response) => {
             if (response && response.status === 201) {
                console.log(response.data);
                setPosition(null);
@@ -61,7 +49,8 @@ function LocationForm() {
                setIndoor(false);
                setType('Study');
             }
-         });
+         })
+         .catch(error => console.log(error));
       }
    }
 

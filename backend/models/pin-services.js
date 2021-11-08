@@ -1,15 +1,14 @@
+const dotenv = require("dotenv").config({ path: "database.env" });
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
-require('dotenv').config({ path: __dirname + '/../backend.env'})
 
 const uri = process.env.DB_URI;
 
 mongoose
   .connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((error) => console.log(error));
 
 async function addPin(pin) {
@@ -31,6 +30,18 @@ async function getPins(lat, lon) {
     result = await findPinByCoords(lat, lon);
   }
   return result;
+}
+
+async function findPinByLocation(title) {   
+  let result;   
+  if (title === undefined) {     
+    result = await pinModel.find();   
+  } 
+    else {     
+      result = await pinModel.find({title: new RegExp(title)});
+      // result = await pinModel.find({title: {$regex: /mm/}});   
+  }   
+  return result; 
 }
 
 async function findPinByCoords(lat, lon) {
@@ -74,10 +85,34 @@ async function downvotePin(id) {
   }
 }
 
+async function findPinByLocation(title) {
+  let result;
+  if (title === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ title: title });
+  }
+  return result;
+}
+
+
+async function filterByType(pinType) {
+  let result;
+  if (pinType === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ pinType: pinType });
+  }
+  return result;
+}
+
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
 exports.removePin = removePin;
 exports.findPinById = findPinById;
+exports.findPinByLocation = findPinByLocation;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
+exports.findPinByLocation = findPinByLocation;
+exports.filterByType = filterByType;
