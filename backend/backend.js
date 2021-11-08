@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const pinServices = require("./models/pin-services");
+const commentServices = require("./models/comment-services");
 const app = express();
 const port = 5000;
 
@@ -28,12 +29,40 @@ app.post("/pins", async (req, res) => {
   }
 });
 
+app.get("/pins/:title", async (req, res) => {
+  const title = req.params.title;
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
+  res.send(result);
+});
+
+
 app.delete("/pins/:id", async (req, res) => {
   const id = req.params["id"];
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.removePin(id);
+    res.status(204).end();
+  }
+});
+
+app.post("/comments", async (req, res) => {
+  const comment = req.body;
+  const savedComment = await commentServices.addComment(comment);
+  if (savedComment) {
+    res.status(201).send(savedComment);
+  } else {
+    res.status(500).end();
+  }
+});
+
+app.delete("/comments/:id", async (req, res) => {
+  const id = req.params["id"];
+  let comment = await commentServices.findCommentById(id);
+  if (comment === undefined) res.status(404).send("Comment not found.");
+  else {
+    await commentServices.removeComment(id);
     res.status(204).end();
   }
 });
@@ -56,6 +85,20 @@ app.put("/pins/downvote/:id", async (req, res) => {
     await pinServices.downvotePin(id);
     res.status(204).end();
   }
+});
+
+app.get("/comments", async (req, res) => {
+  const id = req.query.id;
+  let result = await commentServices.getComments(id);
+  result = { comment: result };
+  res.send(result);
+});
+
+app.get("/pins/:title", async (req, res) => {
+  const title = req.params.title;
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
+  res.send(result);
 });
 
 app.get("/pins/:type", async (req, res) => {
