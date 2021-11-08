@@ -3,7 +3,7 @@ const cors = require("cors");
 const pinServices = require("./models/pin-services");
 const commentServices = require("./models/comment-services");
 const app = express();
-const port = 8124;
+const port = 5000;
 
 app.use(express.json());
 
