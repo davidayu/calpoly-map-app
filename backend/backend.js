@@ -19,7 +19,6 @@ app.get("/pins", async (req, res) => {
   const title = req.query.title;
   const pinType = req.query.type;
 
-
   if (lat != undefined || lon != undefined) {
     let result = await pinServices.getPins(lat, lon);
     result = { pins_list: result };
