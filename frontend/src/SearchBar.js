@@ -47,7 +47,7 @@ function SearchBar(props) {
         onFocus={handleFocus}
         autoComplete="off"
       />
-      {!searching
+      {!searching || !props.searchedPins
         ? null
         : props.searchedPins.slice(0, 4).map((pin) => (
             <div
