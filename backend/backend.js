@@ -25,7 +25,6 @@ app.get("/pins", async (req, res) => {
     result = { pins_list: result };
     res.send(result);
   } else if (title != undefined) {
-    console.log("Title:" + title);
     let result = await pinServices.findPinByLocation(title);
     result = { pins_list: result };
     res.send(result);
