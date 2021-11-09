@@ -7,14 +7,14 @@ function SearchBar(props) {
   const [searching, setSearching] = useState(false);
 
   function handleChange(event) {
-   const newQuery = event.target.value
+    const newQuery = event.target.value;
     setQuery(newQuery);
     axios
       .get(`${process.env.REACT_APP_API_HOST}/pins?title=${newQuery}`)
       .then((response) => {
-         if (response && response.status === 200) {
-            props.updateSearchedPins(response.data.pins_list);
-         }
+        if (response && response.status === 200) {
+          props.updateSearchedPins(response.data.pins_list);
+        }
       })
       .catch((error) => console.log(error));
   }
@@ -43,7 +43,8 @@ function SearchBar(props) {
         onFocus={handleFocus}
         autoComplete="off"
       />
-      {!searching ? null
+      {!searching
+        ? null
         : props.searchedPins.slice(0, 4).map((pin) => (
             <div
               key={pin._id}
@@ -56,7 +57,6 @@ function SearchBar(props) {
           ))}
     </div>
   );
-
 }
 
 export default SearchBar;
