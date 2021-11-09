@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const pinModel = require("./pin");
 
 const uri = process.env.DB_URI;
+
 mongoose
   .connect(uri, {
     useNewUrlParser: true,

@@ -1,2 +1,0 @@
-DB_URI="mongodb+srv://admin:mapapp@calpolycluster.m4ncq.mongodb.net/myFirstDatabase"
-REACT_APP_API_HOST="http://localhost:5000"
