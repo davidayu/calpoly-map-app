@@ -6,25 +6,21 @@ function SearchBar(props) {
   const [query, setQuery] = useState("");
   const [searching, setSearching] = useState(false);
 
-  useEffect(() => filterSearchedPins(query), [query]);
-
   function handleChange(event) {
-    setQuery(event.target.value);
+   const newQuery = event.target.value
+    setQuery(newQuery);
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/pins?title=${newQuery}`)
+      .then((response) => {
+         if (response && response.status === 200) {
+            props.updateSearchedPins(response.data.pins_list);
+         }
+      })
+      .catch((error) => console.log(error));
   }
 
   function handleFocus() {
     setSearching(true);
-  }
-
-  function filterSearchedPins() {
-    axios
-      .get(`${process.env.REACT_APP_API_HOST}/pins?title=${query}`)
-      .then((response) => {
-        if (response && response.status === 200) {
-          props.updateSearchedPins(response.data.pins_list);
-        }
-      })
-      .catch((error) => console.log(error));
   }
 
   function handleQueryClick(id) {
@@ -35,7 +31,7 @@ function SearchBar(props) {
   }
 
   return (
-    <span>
+    <div>
       <SearchIcon />
       <label htmlFor="search" />
       <input
@@ -47,8 +43,7 @@ function SearchBar(props) {
         onFocus={handleFocus}
         autoComplete="off"
       />
-      {!searching || !props.searchedPins
-        ? null
+      {!searching ? null
         : props.searchedPins.slice(0, 4).map((pin) => (
             <div
               key={pin._id}
@@ -56,11 +51,12 @@ function SearchBar(props) {
                 handleQueryClick(pin._id);
               }}
             >
-              {" "}
-              {pin.title}{" "}
+              {pin.title}
             </div>
           ))}
-    </span>
+    </div>
   );
+
 }
+
 export default SearchBar;
