@@ -16,13 +16,39 @@ app.get("/", (req, res) => {
 app.get("/pins", async (req, res) => {
   const lat = req.query.lat;
   const lon = req.query.lon;
-  let result = await pinServices.getPins(lat, lon);
-  result = { pins_list: result };
-  res.send(result);
+  const title = req.query.title;
+  const pinType = req.query.type;
+
+
+  if (lat != undefined || lon != undefined) {
+    let result = await pinServices.getPins(lat, lon);
+    result = { pins_list: result };
+    res.send(result);
+  } else if (title != undefined) {
+    console.log("Title:" + title);
+    let result = await pinServices.findPinByLocation(title);
+    result = { pins_list: result };
+    res.send(result);
+  } else if (pinType != undefined) {
+    let result = await pinServices.filterByType(pinType);
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send(result);
+    }
+  } else {
+    let result = await pinServices.getPins();
+    if (result === undefined || result === null)
+      res.status(404).send("Resource not found.");
+    else {
+      res.send(result);
+    }
+  }
 });
 
-app.get("/pins/title/:title", async (req, res) => {
+app.get("/pins/title", async (req, res) => {
   const title = req.params["title"];
+  console.log("Title:" + title);
   let result = await pinServices.findPinByLocation(title);
   result = { pins_list: result };
   res.send(result);
