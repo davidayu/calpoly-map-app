@@ -40,6 +40,7 @@ app.get("/pins", async (req, res) => {
     if (result === undefined || result === null)
       res.status(404).send("Resource not found.");
     else {
+      result = { pins_list: result };
       res.send(result);
     }
   }
