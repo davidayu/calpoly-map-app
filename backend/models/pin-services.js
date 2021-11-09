@@ -85,15 +85,15 @@ async function downvotePin(id) {
   }
 }
 
-async function findPinByLocation(title) {
-  let result;
-  if (title === undefined) {
-    result = await pinModel.find();
-  } else {
-    result = await pinModel.find({ title: title });
-  }
-  return result;
-}
+// async function findPinByLocation(title) {
+//   let result;
+//   if (title === undefined) {
+//     result = await pinModel.find();
+//   } else {
+//     result = await pinModel.find({ title: title });
+//   }
+//   return result;
+// }
 
 
 async function filterByType(pinType) {
