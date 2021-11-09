@@ -1,9 +1,8 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import Pin from './Pin'
+import Pin from "./Pin";
 
 function Map(props) {
-
-   const defaultPosition = [35.3, -120.66];
+  const defaultPosition = [35.3, -120.66];
 
    return (
       <div className="map__container">
@@ -17,13 +16,13 @@ function Map(props) {
                height:"65vh",
             }}
          >
-         {props.searchedPins.map(pin => 
-            <Pin 
+         {props.searchedPins.map(pin =>
+            <Pin
             key={pin._id}
             id={pin._id}
             position={[pin.lat, pin.lon]}
-            title={pin.title} 
-            description={pin.description} 
+            title={pin.title}
+            description={pin.description}
             type={pin.pinType}
             upvotes={pin.upvotes}
             downvotes={pin.downvotes}

@@ -1,18 +1,14 @@
 const mongoose = require("mongoose");
 const commentModel = require("./comment");
 const pinModel = require("./pin");
-const dotenv = require('dotenv').config({ path: 'database.env' })
-
+const dotenv = require("dotenv").config({ path: "database.env" });
 
 const uri = process.env.DB_URI;
 mongoose
-  .connect(
-    uri,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .catch((error) => console.log(error));
 
 async function addComment(comment) {
@@ -49,7 +45,33 @@ async function removeComment(id) {
   return await commentModel.findByIdAndDelete({ _id: id });
 }
 
+async function upvoteComment(id) {
+  let result;
+  try {
+    result = await commentModel.findById(id);
+    result.upvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function downvoteComment(id) {
+  let result;
+  try {
+    result = await commentModel.findById(id);
+    result.downvotes += 1;
+    await result.save();
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
 exports.addComment = addComment;
 exports.getComments = getComments;
 exports.removeComment = removeComment;
 exports.findCommentById = findCommentById;
+exports.upvoteComment = upvoteComment;
+exports.downvoteComment = downvoteComment;

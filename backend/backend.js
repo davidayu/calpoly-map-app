@@ -21,6 +21,23 @@ app.get("/pins", async (req, res) => {
   res.send(result);
 });
 
+app.get("/pins/title/:title", async (req, res) => {
+  const title = req.params["title"];
+  let result = await pinServices.findPinByLocation(title);
+  result = { pins_list: result };
+  res.send(result);
+});
+
+app.get("/pins/type/:type", async (req, res) => {
+  const pinType = req.params["type"];
+  let result = await pinServices.filterByType(pinType);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send(result);
+  }
+});
+
 app.post("/pins", async (req, res) => {
   const pin = req.body;
   const savedPin = await pinServices.addPin(pin);
@@ -31,40 +48,12 @@ app.post("/pins", async (req, res) => {
   }
 });
 
-app.get("/pins/:title", async (req, res) => {
-  const title = req.params.title;
-  let result = await pinServices.findPinByLocation(title);
-  result = { pins_list: result };
-  res.send(result);
-});
-
-
 app.delete("/pins/:id", async (req, res) => {
   const id = req.params["id"];
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.removePin(id);
-    res.status(204).end();
-  }
-});
-
-app.post("/comments", async (req, res) => {
-  const comment = req.body;
-  const savedComment = await commentServices.addComment(comment);
-  if (savedComment) {
-    res.status(201).send(savedComment);
-  } else {
-    res.status(500).end();
-  }
-});
-
-app.delete("/comments/:id", async (req, res) => {
-  const id = req.params["id"];
-  let comment = await commentServices.findCommentById(id);
-  if (comment === undefined) res.status(404).send("Comment not found.");
-  else {
-    await commentServices.removeComment(id);
     res.status(204).end();
   }
 });
@@ -89,6 +78,26 @@ app.put("/pins/downvote/:id", async (req, res) => {
   }
 });
 
+app.post("/comments", async (req, res) => {
+  const comment = req.body;
+  const savedComment = await commentServices.addComment(comment);
+  if (savedComment) {
+    res.status(201).send(savedComment);
+  } else {
+    res.status(500).end();
+  }
+});
+
+app.delete("/comments/:id", async (req, res) => {
+  const id = req.params["id"];
+  let comment = await commentServices.findCommentById(id);
+  if (comment === undefined) res.status(404).send("Comment not found.");
+  else {
+    await commentServices.removeComment(id);
+    res.status(204).end();
+  }
+});
+
 app.get("/comments", async (req, res) => {
   const id = req.query.id;
   let result = await commentServices.getComments(id);
@@ -96,23 +105,26 @@ app.get("/comments", async (req, res) => {
   res.send(result);
 });
 
-app.get("/pins/:title", async (req, res) => {
-  const title = req.params.title;
-  let result = await pinServices.findPinByLocation(title);
-  result = { pins_list: result };
-  res.send(result);
-});
-
-app.get("/pins/:type", async (req, res) => {
-  const pinType = req.params["type"];
-  let result = await pinServices.filterByType(pinType);
-  if (result === undefined || result === null)
-    res.status(404).send("Resource not found.");
+app.put("/comments/upvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let comment = await commentServices.findCommentById(id);
+  if (comment === undefined) res.status(404).send("Comment not found.");
   else {
-    res.send(result);
+    await commentServices.upvoteComment(id);
+    res.status(204).end();
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.put("/comments/downvote/:id", async (req, res) => {
+  const id = req.params["id"];
+  let comment = await commentServices.findCommentById(id);
+  if (comment === undefined) res.status(404).send("Comment not found.");
+  else {
+    await commentServices.downvoteComment(id);
+    res.status(204).end();
+  }
+});
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });

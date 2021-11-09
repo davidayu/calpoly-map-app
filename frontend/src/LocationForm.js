@@ -3,6 +3,11 @@ import Map from './Map'
 import axios from 'axios';
 
 function LocationForm() {
+  const [position, setPosition] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [indoor, setIndoor] = useState(false);
+  const [type, setType] = useState("");
 
    const [position, setPosition] = useState(null);
    const [title, setTitle] = useState('');
@@ -11,24 +16,40 @@ function LocationForm() {
    const [type, setType] = useState('STUDY');
 
    function handleMapClick(pos) {
-      setPosition(pos);
-   }
+    setPosition(pos);
+  }
 
-   function handleChange(event) {
-      const {name, value} = event.target;
-      if (name === 'title')
-         setTitle(value);
-      else if (name === 'description')
-         setDescription(value);
-      else if (name === 'indoor')
-         setIndoor(!indoor);
-      else if (name === 'type')
-         setType(value);
-   }
+  function handleChange(event) {
+    const { name, value } = event.target;
+    if (name === "title") setTitle(value);
+    else if (name === "description") setDescription(value);
+    else if (name === "indoor") setIndoor(!indoor);
+    else if (name === "type") setType(value);
+  }
+
+  function handleSubmission() {
+    if (position && title.length >= 2 && type) {
+      const location = {
+        longitude: position.lat,
+        latitude: position.lng,
+        elevation: 0,
+      };
+      console.log(location);
+      console.log({
+        title: title,
+        description: description,
+        location: location,
+        upvotes: 0,
+        downvotes: 0,
+        pinType: type,
+        indoor: indoor,
+      });
+    }
+  }
 
    function handleSubmission() {
       if (position && title.length >= 2 && type) {
-         const newPin = 
+         const newPin =
          {
             title: title,
             description: description,
@@ -60,7 +81,7 @@ function LocationForm() {
          <Map position={position} handleMapClick={handleMapClick} ></Map>
          <form>
             <label htmlFor="title"> Location Name </label>
-            <input 
+            <input
                type="text"
                id="title"
                name="title"
@@ -69,7 +90,7 @@ function LocationForm() {
             />
             <br />
             <label htmlFor="description"> Location Description </label>
-            <textarea 
+            <textarea
                id="description"
                name="description"
                value={description}
@@ -82,14 +103,14 @@ function LocationForm() {
                id="indoor"
                name="indoor"
                checked={indoor}
-               onChange={handleChange} 
+               onChange={handleChange}
             />
             <br />
             <label htmlFor="type">Location Type </label>
             <select
                id="type"
-               name="type" 
-               value={type} 
+               name="type"
+               value={type}
                onChange={handleChange}>
                <option value="STUDY">Study</option>
                <option value="DINING">Dining</option>

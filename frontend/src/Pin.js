@@ -12,12 +12,12 @@ function Pin(props) {
    useMapEvents(
       !props.handleMapClick ? {}  :
       {
-         click: (event) => 
+         click: (event) =>
          props.handleMapClick(event.latlng)
       }
    );
 
-   return (props.position === null ? null : 
+   return (props.position === null ? null :
       <Marker position={props.position} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [13, 41]})}>
          <Popup>
             <h5>{props.title}</h5>
