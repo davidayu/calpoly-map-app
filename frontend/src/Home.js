@@ -14,8 +14,9 @@ function Home() {
         if (response && response.status === 200) {
           setAllPins(response.data.pins_list);
           setSearchedPins(response.data.pins_list);
+          // console.log(response.data.pins_list);
         }
-        console.log(response.data.pins_list);
+        console.log(response);
       })
       .catch((error) => console.log(error));
   }, []);

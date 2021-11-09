@@ -23,26 +23,6 @@ function LocationForm() {
 
   function handleSubmission() {
     if (position && title.length >= 2 && type) {
-      const location = {
-        longitude: position.lat,
-        latitude: position.lng,
-        elevation: 0,
-      };
-      console.log(location);
-      console.log({
-        title: title,
-        description: description,
-        location: location,
-        upvotes: 0,
-        downvotes: 0,
-        pinType: type,
-        indoor: indoor,
-      });
-    }
-  }
-
-  function handleSubmission() {
-    if (position && title.length >= 2 && type) {
       const newPin = {
         title: title,
         description: description,

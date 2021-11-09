@@ -16,13 +16,12 @@ function SearchBar(props) {
     setSearching(true);
   }
 
-  function filterSearchedPins(titleQuery) {
+  function filterSearchedPins() {
     axios
-      .get(`${process.env.REACT_APP_API_HOST}/pins/${query}`)
+      .get(`${process.env.REACT_APP_API_HOST}/pins?title=${query}`)
       .then((response) => {
         if (response && response.status === 200) {
           props.updateSearchedPins(response.data.pins_list);
-          console.log(response.data.pins_list);
         }
       })
       .catch((error) => console.log(error));

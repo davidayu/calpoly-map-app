@@ -16,7 +16,9 @@ function Map(props) {
           height: "65vh",
         }}
       >
-        {props.searchedPins.map((pin) => (
+        { !props.searchedPins ? null :
+
+           props.searchedPins.map((pin) => (
           <Pin
             key={pin._id}
             id={pin._id}
