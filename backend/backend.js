@@ -46,24 +46,6 @@ app.get("/pins", async (req, res) => {
   }
 });
 
-app.get("/pins/title", async (req, res) => {
-  const title = req.params["title"];
-  console.log("Title:" + title);
-  let result = await pinServices.findPinByLocation(title);
-  result = { pins_list: result };
-  res.send(result);
-});
-
-app.get("/pins/type/:type", async (req, res) => {
-  const pinType = req.params["type"];
-  let result = await pinServices.filterByType(pinType);
-  if (result === undefined || result === null)
-    res.status(404).send("Resource not found.");
-  else {
-    res.send(result);
-  }
-});
-
 app.post("/pins", async (req, res) => {
   const pin = req.body;
   const savedPin = await pinServices.addPin(pin);
