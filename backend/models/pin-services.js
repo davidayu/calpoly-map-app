@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const pinModel = require("./pin");
 
 const uri = process.env.DB_URI;
+
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
@@ -27,6 +28,17 @@ async function getPins(lat, lon) {
     result = await pinModel.find();
   } else {
     result = await findPinByCoords(lat, lon);
+  }
+  return result;
+}
+
+async function findPinByLocation(title) {
+  let result;
+  if (title === undefined) {
+    result = await pinModel.find();
+  } else {
+    result = await pinModel.find({ title: new RegExp(title) });
+    // result = await pinModel.find({title: {$regex: /mm/}});
   }
   return result;
 }
@@ -87,6 +99,7 @@ exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;
 exports.removePin = removePin;
 exports.findPinById = findPinById;
+exports.findPinByLocation = findPinByLocation;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
 exports.filterByType = filterByType;
