@@ -5,13 +5,12 @@ import { ReactComponent as ThumbsUp } from "./thumbs-up.svg";
 import { ReactComponent as ThumbsDown } from "./thumbs-down.svg";
 
 function Pin(props) {
-  // Definitely reevaluate this useMapEvents hook since this is likely not best practice
 
   useMapEvents(
-    !props.handleMapClick
+    props.handleMapClick === undefined
       ? {}
       : {
-          click: (event) => props.handleMapClick(event.latlng),
+         click: (event) => props.handleMapClick(event.latlng),
         }
   );
 
@@ -26,14 +25,16 @@ function Pin(props) {
         })
       }
     >
-      <Popup>
-        <h5>{props.title}</h5>
-        <p>{props.description}</p>
-        <ThumbsUp title="Upvotes" />
-        <span>{props.upvotes}</span>
-        <ThumbsDown title="Downvotes" />
-        <span>{props.downvotes}</span>
-      </Popup>
+      { !props.id ? null :
+         <Popup>
+            <h5>{props.title}</h5>
+            <p>{props.description}</p>
+            <ThumbsUp title="Upvotes" />
+            <span>{props.upvotes}</span>
+            <ThumbsDown title="Downvotes" />
+            <span>{props.downvotes}</span>
+         </Popup>
+      }
     </Marker>
   );
 }

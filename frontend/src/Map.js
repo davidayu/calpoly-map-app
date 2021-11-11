@@ -4,6 +4,26 @@ import Pin from "./Pin";
 function Map(props) {
   const defaultPosition = [35.3, -120.66];
 
+   function displayPins() {
+      if (props.searchedPins)
+         return (
+            props.searchedPins.map((pin) => (
+               <Pin
+                 key={pin._id}
+                 id={pin._id}
+                 position={[pin.lat, pin.lon]}
+                 title={pin.title}
+                 description={pin.description}
+                 type={pin.pinType}
+                 upvotes={pin.upvotes}
+                 downvotes={pin.downvotes}
+               />
+             ))
+         );
+         else if (props.handleMapClick)
+            return (<Pin position={props.newPinPosition} handleMapClick={props.handleMapClick} />);
+   }
+
   return (
     <div className="map__container">
       <MapContainer
@@ -16,18 +36,7 @@ function Map(props) {
           height: "65vh",
         }}
       >
-        {props.searchedPins.map((pin) => (
-          <Pin
-            key={pin._id}
-            id={pin._id}
-            position={[pin.lat, pin.lon]}
-            title={pin.title}
-            description={pin.description}
-            type={pin.pinType}
-            upvotes={pin.upvotes}
-            downvotes={pin.downvotes}
-          />
-        ))}
+        {displayPins()}
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"

@@ -11,6 +11,7 @@ function LocationForm() {
 
   function handleMapClick(pos) {
     setPosition(pos);
+    console.log(pos);
   }
 
   function handleChange(event) {
@@ -52,7 +53,7 @@ function LocationForm() {
   return (
     <div>
       <h1>Submit a new location</h1>
-      <Map position={position} handleMapClick={handleMapClick}></Map>
+      <Map newPinPosition={position} handleMapClick={handleMapClick}></Map>
       <form>
         <label htmlFor="title"> Location Name </label>
         <input
