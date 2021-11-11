@@ -13,8 +13,10 @@ function CommentView(props) {
 
     const [comments, addVote] = useState(commentz)//getComments()
 
-    function upVote(index){
-        commentz[index].upvotes += 1;
+    function upVote(index){ //commenting changes the displayed values????
+        console.log(index);//working!!
+        commentz[index].upvotes = commentz[index].upvotes + 1;
+        console.log(commentz[index].upvotes);
         addVote(commentz);
     }
     /*const [show, setShow] = useState(false);
