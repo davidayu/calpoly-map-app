@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/pins", async (req, res) => {
-  const test = 0;
   const lat = req.query.lat;
   const lon = req.query.lon;
   const title = req.query.title;

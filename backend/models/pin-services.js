@@ -114,7 +114,7 @@ async function removeCommentFromPin(pinID, commentID) {
 async function getPinComments(id) {
   let pin;
   try {
-    pin = await pinModel.findById(id);
+    pin = await pinModel.findById(id).populate('comments');
     return pin.comments;
   } catch (error) {
     console.log(error);
