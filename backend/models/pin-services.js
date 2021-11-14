@@ -1,4 +1,5 @@
 const dotenv = require("dotenv").config({ path: "database.env" });
+const test = 0;
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
 const commentModel = require("./comment");
