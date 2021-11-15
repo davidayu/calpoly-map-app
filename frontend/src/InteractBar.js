@@ -1,11 +1,15 @@
 import React from "react";
-import { ReactComponent as InteractBackground } from "./interact-bar.svg";
+import { ReactComponent as ListView } from "./list.svg";
+import { ReactComponent as AddPin } from "./file-plus.svg";
+import { ReactComponent as RemovePin } from "./file-minus.svg";
+import axios from "axios";
 
 function InteractBar() {
   return (
     <div>
-      <InteractBackground style={{top: '500px', left: '900px'}}/>
-      <label htmlFor="interact" />
+      <ListView />
+      <AddPin />
+      <RemovePin />
     </div>
   );
 }
