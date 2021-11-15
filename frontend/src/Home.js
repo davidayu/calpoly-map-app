@@ -30,7 +30,7 @@ function Home() {
         allPins={allPins}
         updateSearchedPins={updateSearchedPins}
       />
-      <Map searchedPins={searchedPins} />
+      <Map pins={searchedPins} />
     </div>
   );
 }
