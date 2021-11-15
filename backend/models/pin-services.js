@@ -91,8 +91,8 @@ async function addCommentToPin(pinID, comment) {
     const commentToAdd = new commentModel(comment);
     const savedComment = await commentToAdd.save();
     pin.comments.push(commentToAdd._id);
-    const savedPin = await pin.save();
-    return savedPin;
+    await pin.save();
+    return savedComment;
   } catch (error) {
     console.log(error);
     return undefined;

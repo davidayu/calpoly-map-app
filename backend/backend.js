@@ -119,7 +119,6 @@ app.post("/pins/:id/comments/", async (req, res) => {
   try {
     const id = req.params["id"];
     const comment = req.body;
-    await commentServices.addComment(comment);
     const savedComment = await pinServices.addCommentToPin(id, comment);
     if (savedComment) {
       res.status(201).send(savedComment);
