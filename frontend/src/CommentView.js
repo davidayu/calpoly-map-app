@@ -1,4 +1,8 @@
 // import { svg } from "leaflet";
+
+import Home from "./Home";
+import ReactDOM from "react-dom";
+
 import React, { useState } from "react";
 import Collapsible from 'react-collapsible';
 
@@ -11,9 +15,19 @@ function CommentViewHeader(props){
             <div style={{fontSize: 20}}>{props.pin.title}</div>
             <div>{props.pin.description}</div>
             <br></br>
+            
+            <button onClick={goHome} style={{
+                            position: 'absolute',
+                            right: 0,
+                            top: 0,
+                        }}> X  </button>
             <div>Comments:</div>
         </div>
     );
+}
+
+function goHome(){//add browser router??
+    ReactDOM.render(<Home />, document.getElementById("root"));
 }
 
 function CommentViewBody(props) {
@@ -34,6 +48,7 @@ function CommentView(){
     let commentz = [{description:"I go here all the time", downvotes: 10, upvotes: 50},{description:"I got my shoes dirty here, I don't like it", downvotes: 6, upvotes: 32}]
 
     const [comments, setComments] = useState(commentz);
+    const [comment, userSubmit] = useState({text:''});
 
     function upVote(index){
         let commentsTemp = comments;
@@ -47,10 +62,25 @@ function CommentView(){
         setComments([...commentsTemp]);
     }
 
+    function inputChange(event){
+        const { name, value } = event.target;
+        userSubmit(value);
+    }
+
+    function commentSubmit(){
+        console.log(comment);// replace with backend insert
+        document.getElementById("usrSubmit").reset();
+        userSubmit("");
+    }
+
     return (
         <div>
             <CommentViewHeader pin = {pin}/>
             <CommentViewBody  commentsData = {comments} upVote = {upVote} downVote = {downVote}/>
+            <form id="usrSubmit">
+                <input type="text" name="userComment" placeholder="Enter Comment" onChange={inputChange}/>
+                <input type="button" onClick={() => commentSubmit()} value="Submit"/>
+            </form>
         </div>
     );
 }
