@@ -48,7 +48,7 @@ function CommentView(){
     let commentz = [{description:"I go here all the time", downvotes: 10, upvotes: 50},{description:"I got my shoes dirty here, I don't like it", downvotes: 6, upvotes: 32}]
 
     const [comments, setComments] = useState(commentz);
-    const [comment, userSubmit] = useState({text:''});
+    const [comment, userSubmit] = useState('');
 
     function upVote(index){
         let commentsTemp = comments;
@@ -64,12 +64,12 @@ function CommentView(){
 
     function inputChange(event){
         const { name, value } = event.target;
+        console.log(comment);
         userSubmit(value);
     }
 
     function commentSubmit(){
         console.log(comment);// replace with backend insert
-        document.getElementById("usrSubmit").reset();
         userSubmit("");
     }
 
@@ -78,7 +78,7 @@ function CommentView(){
             <CommentViewHeader pin = {pin}/>
             <CommentViewBody  commentsData = {comments} upVote = {upVote} downVote = {downVote}/>
             <form id="usrSubmit">
-                <input type="text" name="userComment" placeholder="Enter Comment" onChange={inputChange}/>
+                <input type="text" name="userComment" placeholder="Enter Comment" onChange={inputChange} value={comment}/>
                 <input type="button" onClick={() => commentSubmit()} value="Submit"/>
             </form>
         </div>
