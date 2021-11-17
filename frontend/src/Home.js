@@ -32,7 +32,6 @@ function Home() {
         updateSearchedPins={updateSearchedPins}
       />
       <Map searchedPins={searchedPins} />
-      <Map pins={searchedPins} />
       <InteractBar />
     </div>
   );

@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import Collapsible from 'react-collapsible';
 
-import { ReactComponent as ThumbsUp } from "./thumbs-up.svg";
-import { ReactComponent as ThumbsDown } from "./thumbs-down.svg";
+import { ReactComponent as ThumbsUp } from "./svg/thumbs-up.svg";
+import { ReactComponent as ThumbsDown } from "./svg/thumbs-down.svg";
 
 function CommentViewHeader(props){
     return (
@@ -21,8 +21,8 @@ function CommentViewBody(props) {
         return(
             <Collapsible key={index} trigger = "▼/▲" open = 'true'>
                 {text.description} <br></br>
-                <ThumbsUp title="Upvotes" onClick={() => props.upVote(index)}/> {text.upvotes} 
-                <ThumbsDown title="Downvotes" onClick={() => props.downVote(index)}/> {text.downvotes} 
+                <ThumbsUp title="Upvotes" onClick={() => props.upVote(index)}/> {text.upvotes}
+                <ThumbsDown title="Downvotes" onClick={() => props.downVote(index)}/> {text.downvotes}
             </Collapsible>
         );
     });

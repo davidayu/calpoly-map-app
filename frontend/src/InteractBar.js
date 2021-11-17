@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ReactComponent as ListIcon } from "./list.svg";
-import { ReactComponent as AddPinIcon } from "./file-plus.svg";
-import { ReactComponent as RemovePinIcon } from "./file-minus.svg";
-import axios from "axios";
+import { ReactComponent as ListIcon } from "./svg/list.svg";
+import { ReactComponent as AddPinIcon } from "./svg/file-plus.svg";
 import ListView from "./ListView";
 import LocationForm from "./LocationForm";
 
@@ -21,7 +19,6 @@ function InteractBar() {
     <div>
       <ListIcon onClick={ShowListView} />
       <AddPinIcon onClick={ShowLocationForm} />
-      <RemovePinIcon />
     </div>
   );
 }
