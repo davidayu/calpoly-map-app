@@ -12,7 +12,7 @@ function ShowListView() {
 }
 
 function ShowLocationForm() {
-  //ReactDOM.render(<LocationForm />, document.getElementById("root"));
+  ReactDOM.render(<LocationForm />, document.getElementById("root"));
 }
 
 
