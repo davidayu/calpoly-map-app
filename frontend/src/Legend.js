@@ -1,21 +1,56 @@
 import React, { useState } from "react";
 import { ReactComponent as StudyIcon } from "./study-icon.svg";
 import { ReactComponent as EatingIcon } from "./eating-icon.svg";
-import { ReactComponent as RelaxingIcon } from "./relaxing-icon.svg";
+import { ReactComponent as BrushIcon } from "./brush-icon.svg";
 import { ReactComponent as ExpandIcon } from "./expand-icon.svg";
+import axios from "axios";
 
 function Legend(props) {
   const [study, setStudy] = useState(false);
   const [eating, setEating] = useState(false);
-  const [relaxing, setRelaxing] = useState(false);
+  const [art, setArt] = useState(false);
   const [expand, setExpand] = useState(true);
 
   function handleChange(event) {
     const { name } = event.target;
     if (name === "study") setStudy(!study);
     else if (name === "eating") setEating(!eating);
-    else if (name === "relaxing") setRelaxing(!relaxing);
+    else if (name === "art") setArt(!art);
     else if (name === "expand") setExpand(!expand);
+
+    checkStates();
+  }
+
+  function checkStates() {
+    var study_query = "";
+    var eating_query = "";
+    var art_query = "";
+
+    if (study) study_query = "STUDY";
+    if (eating) eating_query = "DINING";
+    if (eating) art_query = "ART";
+
+    if (!study && !eating && !art) {
+      axios
+        .get(`${process.env.REACT_APP_API_HOST}/pins`)
+        .then((response) => {
+          if (response && response.status === 200) {
+            console.log(response.data);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      axios
+        .get(
+          `${process.env.REACT_APP_API_HOST}/pins?type=${study_query}&type=${eating_query}&type=${art_query}`
+        )
+        .then((response) => {
+          if (response && response.status === 200) {
+            console.log(response.data);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   return (
@@ -58,15 +93,15 @@ function Legend(props) {
               />
             </label>
           </div>
-          <div class="relaxing-spaces">
+          <div class="art-spaces">
             <label>
               {" "}
-              <RelaxingIcon /> Relaxing Spaces
+              <BrushIcon /> Art Spaces
               <input
                 type="checkbox"
-                id="relaxing"
-                name="relaxing"
-                checked={relaxing}
+                id="art"
+                name="art"
+                checked={art}
                 onChange={handleChange}
               />
             </label>
