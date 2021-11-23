@@ -28,7 +28,7 @@ function Legend(props) {
 
     if (study) study_query = "STUDY";
     if (eating) eating_query = "DINING";
-    if (eating) art_query = "ART";
+    if (art) art_query = "ART";
 
     if (!study && !eating && !art) {
       axios
