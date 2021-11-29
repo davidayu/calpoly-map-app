@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Map from "./Map";
+import InteractBar from "./InteractBar";
 import axios from "axios";
 
 function Home() {
@@ -30,7 +31,8 @@ function Home() {
         allPins={allPins}
         updateSearchedPins={updateSearchedPins}
       />
-      <Map pins={searchedPins} />
+      <Map searchedPins={searchedPins} />
+      <InteractBar />
     </div>
   );
 }
