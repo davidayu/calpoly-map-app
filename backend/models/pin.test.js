@@ -8,6 +8,7 @@ let mongoServer;
 let conn;
 let pinModel;
 let commentModel;
+let test;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
