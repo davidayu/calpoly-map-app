@@ -13,7 +13,6 @@ function ShowLocationForm() {
   ReactDOM.render(<LocationForm />, document.getElementById("root"));
 }
 
-
 function InteractBar() {
   return (
     <div>
