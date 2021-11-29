@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.96% </span>
+                <span class="strong">88.13% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/59</span>
+                <span class='fraction'>52/59</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.96% </span>
+                <span class="strong">88.13% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>46/59</span>
+                <span class='fraction'>52/59</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -231,11 +231,11 @@
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -276,26 +276,26 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -354,9 +354,9 @@ function getConnection() {
 async function addComment(comment) {
   try {
     const commentModel = getConnection().model("Comment", commentSchema);
-    const commentToAdd = await commentModel.addComment(comment);
-    const savedComment = <span class="cstat-no" title="statement not covered" >await commentToAdd.save();</span>
-<span class="cstat-no" title="statement not covered" >    return savedComment;</span>
+    const commentToAdd = await new commentModel(comment);
+    const savedComment = await commentToAdd.save();
+    return savedComment;
   } catch (error) {
     console.log(error);
     return false;
@@ -400,12 +400,12 @@ async function upvoteComment(id) {
     const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
     result.upvotes += 1;
-<span class="cstat-no" title="statement not covered" >    await result.save();</span>
+    await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
   }
-<span class="cstat-no" title="statement not covered" >  return result;</span>
 }
 &nbsp;
 async function downvoteComment(id) {
@@ -414,12 +414,12 @@ async function downvoteComment(id) {
     const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
     result.downvotes += 1;
-<span class="cstat-no" title="statement not covered" >    await result.save();</span>
+    await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
   }
-<span class="cstat-no" title="statement not covered" >  return result;</span>
 }
 &nbsp;
 exports.addComment = addComment;
@@ -436,7 +436,7 @@ exports.setConnection = setConnection;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Nov 29 2021 15:02:35 GMT-0800 (Pacific Standard Time)
+                at Mon Nov 29 2021 15:36:56 GMT-0800 (Pacific Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

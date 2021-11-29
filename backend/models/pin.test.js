@@ -365,9 +365,78 @@ test("Add comment to pin - successful path", async () => {
     dummyComment
   );
   expect(addedComment).toBeDefined();
-  expect(addedComment.id).toBe(dummyComment.id);
-  expect(addedComment.title).toBe(addedPin.title);
-  expect(addedComment.description).toBe(addedPin.description);
+  expect(addedComment.title).toBe(dummyComment.title);
+  expect(addedComment.description).toBe(dummyComment.description);
+});
+
+test("Deleting comment from pin - successful path", async () => {
+  const dummyComment = {
+    description: "noice",
+    upvotes: 3,
+    downvotes: 4,
+  };
+  const dummyPin = {
+    lat: 23,
+    lon: 43,
+    title: "cs building",
+    description: "wonderful classes",
+    upvotes: 34,
+    downvotes: 23,
+    pinType: "STUDY",
+    indoor: true,
+    pinState: "NEW",
+  };
+  const addedPin = await pinServices.addPin(dummyPin);
+  const addedComment = await pinServices.addCommentToPin(
+    addedPin.id,
+    dummyComment
+  );
+  const result = await pinServices.removeCommentFromPin(
+    addedPin.id,
+    addedComment.id
+  );
+
+  expect(result).toBeDefined();
+  expect(result.title).toBe(addedPin.title);
+  expect(result.description).toBe(addedPin.description);
+  expect(result.upvotes).toBe(addedPin.upvotes);
+  expect(result.downvotes).toBe(addedPin.downvotes);
+  expect(result.comments).toHaveLength(0);
+  expect(result.pinType).toBe(addedPin.pinType);
+  expect(result.indoor).toBe(addedPin.indoor);
+  expect(result.pinState).toBe(addedPin.pinState);
+  expect(result).toHaveProperty("_id");
+});
+
+test("Getting pin comments - successful path", async () => {
+  const dummyComment = {
+    description: "noice",
+    upvotes: 3,
+    downvotes: 4,
+  };
+  const dummyPin = {
+    lat: 23,
+    lon: 43,
+    title: "cs building",
+    description: "wonderful classes",
+    upvotes: 34,
+    downvotes: 23,
+    pinType: "STUDY",
+    indoor: true,
+    pinState: "NEW",
+  };
+  const addedPin = await pinServices.addPin(dummyPin);
+  const addedComment = await pinServices.addCommentToPin(
+    addedPin.id,
+    dummyComment
+  );
+  const result = await pinServices.getPinComments(addedPin.id);
+  expect(result).toBeDefined();
+  expect(result).toHaveLength(1);
+  expect(result[0].description).toBe(dummyComment.description);
+  expect(result[0].upvotes).toBe(dummyComment.upvotes);
+  expect(result[0].downvotes).toBe(dummyComment.downvotes);
+  expect(result[0]).toHaveProperty("_id");
 });
 
 //BEFORE I IMPLEMENT THIS, I NEED TO KNOW HOW MANY FAILURE PATHS WILL SUFFICE

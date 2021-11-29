@@ -47,7 +47,7 @@ function getConnection() {
 async function addComment(comment) {
   try {
     const commentModel = getConnection().model("Comment", commentSchema);
-    const commentToAdd = await commentModel.addComment(comment);
+    const commentToAdd = await new commentModel(comment);
     const savedComment = await commentToAdd.save();
     return savedComment;
   } catch (error) {
@@ -94,11 +94,11 @@ async function upvoteComment(id) {
     result = await commentModel.findById(id);
     result.upvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
   }
-  return result;
 }
 
 async function downvoteComment(id) {
@@ -108,11 +108,11 @@ async function downvoteComment(id) {
     result = await commentModel.findById(id);
     result.downvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
   }
-  return result;
 }
 
 exports.addComment = addComment;
