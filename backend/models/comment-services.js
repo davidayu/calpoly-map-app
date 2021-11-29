@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const test = 0;
-const commentModel = require("./comment");
+const commentSchema = require("./comment");
 const pinModel = require("./pin");
 const dotenv = require("dotenv").config({ path: "database.env" });
+
+let conn;
 
 const uri = process.env.DB_URI;
 mongoose
@@ -12,9 +14,40 @@ mongoose
   })
   .catch((error) => console.log(error));
 
+function setConnection(newConn) {
+  return (conn = newConn);
+}
+
+function getConnection() {
+  if (!conn) {
+    if (process.argv.includes("--prod")) {
+      conn = mongoose.createConnection(
+        "mongodb+srv://" +
+          process.env.MONGO_USER +
+          ":" +
+          process.env.MONGO_PWD +
+          "@csc307.7ijdm.mongodb.net/" +
+          process.env.MONGO_DB +
+          "?retryWrites=true&w=majority",
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }
+      );
+    } else {
+      conn = mongoose.createConnection("mongodb://localhost:27017/users", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+    }
+  }
+  return conn;
+}
+
 async function addComment(comment) {
   try {
-    const commentToAdd = new commentModel(comment);
+    const commentModel = getConnection().model("Comment", commentSchema);
+    const commentToAdd = await commentModel.addComment(comment);
     const savedComment = await commentToAdd.save();
     return savedComment;
   } catch (error) {
@@ -25,6 +58,7 @@ async function addComment(comment) {
 
 async function getComments(commentId) {
   let result;
+  const commentModel = getConnection().model("Comment", commentSchema);
   if (commentId === undefined) {
     result = await commentModel.find();
   } else {
@@ -35,6 +69,7 @@ async function getComments(commentId) {
 
 async function findCommentById(id) {
   try {
+    const commentModel = getConnection().model("Comment", commentSchema);
     return await commentModel.findById(id);
   } catch (error) {
     console.log(error);
@@ -43,12 +78,19 @@ async function findCommentById(id) {
 }
 
 async function removeComment(id) {
-  return await commentModel.findByIdAndDelete({ _id: id });
+  try {
+    const commentModel = getConnection().model("Comment", commentSchema);
+    return await commentModel.findByIdAndDelete({ _id: id });
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
 }
 
 async function upvoteComment(id) {
   let result;
   try {
+    const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
     result.upvotes += 1;
     await result.save();
@@ -56,11 +98,13 @@ async function upvoteComment(id) {
     console.log(error);
     return undefined;
   }
+  return result;
 }
 
 async function downvoteComment(id) {
   let result;
   try {
+    const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
     result.downvotes += 1;
     await result.save();
@@ -68,6 +112,7 @@ async function downvoteComment(id) {
     console.log(error);
     return undefined;
   }
+  return result;
 }
 
 exports.addComment = addComment;
@@ -76,3 +121,4 @@ exports.removeComment = removeComment;
 exports.findCommentById = findCommentById;
 exports.upvoteComment = upvoteComment;
 exports.downvoteComment = downvoteComment;
+exports.setConnection = setConnection;
