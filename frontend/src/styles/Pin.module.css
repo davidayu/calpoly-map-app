@@ -1,0 +1,40 @@
+.popup {
+   font-size: 0.75rem;
+}
+
+.popupSubicon {
+   height: 1.25rem;
+   width: 1.25rem;
+   margin-left: 0.75em;
+   margin-right: 0.75em;
+}
+
+.popupTopBar {
+   display: flex;
+   align-items: center;
+}
+
+.popupBottomBar {
+   display: flex;
+   align-items: center;
+   height: 1.5rem;
+}
+
+.expandIcon {
+   height: 1rem;
+   width: 1rem;
+   color: #ffffff;
+   background: #f6565c;
+}
+
+.expandIconWrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: auto;
+   margin-right: 0;
+   height: 1.625rem;
+   width: 1.625rem;
+   background: #f6565c;
+   border-radius: 50%;
+}

@@ -1,4 +1,4 @@
-import Home from "../Home";
+// import Home from "../Home";
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
@@ -30,7 +30,7 @@ function CommentViewHeader(props) {
 
 function goHome() {
   //add browser router??
-  ReactDOM.render(<Home />, document.getElementById("root"));
+//   ReactDOM.render(<Home />, document.getElementById("root"));
 }
 
 function CommentViewBody(props) {
