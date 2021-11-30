@@ -30,7 +30,7 @@ function CommentViewHeader(props) {
 
 function goHome() {
   //add browser router??
-//   ReactDOM.render(<Home />, document.getElementById("root"));
+  //   ReactDOM.render(<Home />, document.getElementById("root"));
 }
 
 function CommentViewBody(props) {

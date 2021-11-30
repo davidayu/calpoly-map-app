@@ -29,10 +29,7 @@ function Home() {
         searchedPins={searchedPins}
         updateSearchedPins={updateSearchedPins}
       />
-      <Map 
-        pins={searchedPins}
-        height="100vh" 
-      />
+      <Map pins={searchedPins} height="100vh" />
       <InteractBar />
     </div>
   );

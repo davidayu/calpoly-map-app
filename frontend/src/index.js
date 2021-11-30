@@ -9,13 +9,14 @@ import ListView from "./components/ListView";
 import CommentView from "./components/CommentView";
 
 ReactDOM.render(
-   <BrowserRouter>
-      <Routes>
-         <Route path="/" exact element={<Home />} />
-         <Route path="/locations" exact element={<ListView />} />
-         <Route path="/locations/new" exact element={<LocationForm />} />
-         <Route path="/locations/:id" exact element={<CommentView />} />
-         <Route path="*" element={<div>404</div>} />
-      </Routes>
-   </BrowserRouter>, 
-   document.getElementById("root"));
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" exact element={<Home />} />
+      <Route path="/locations" exact element={<ListView />} />
+      <Route path="/locations/new" exact element={<LocationForm />} />
+      <Route path="/locations/:id" exact element={<CommentView />} />
+      <Route path="*" element={<div>404</div>} />
+    </Routes>
+  </BrowserRouter>,
+  document.getElementById("root")
+);

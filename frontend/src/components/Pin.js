@@ -8,7 +8,7 @@ import { ReactComponent as ArtIcon } from "../icons/brush.svg";
 import { ReactComponent as DiningIcon } from "../icons/eating.svg";
 import { ReactComponent as GenericIcon } from "../icons/marker.svg";
 import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
-import { pinTypesMap } from "../pinTypes.js"
+import { pinTypesMap } from "../pinTypes.js";
 import style from "../styles/Pin.module.css";
 
 function Pin(props) {
@@ -21,24 +21,30 @@ function Pin(props) {
   );
 
   function TypeIcon(props) {
-   switch (props.type) {
+    switch (props.type) {
       case "STUDY":
-        return (<StudyIcon 
-                  className={style.popupSubicon}
-                  title={pinTypesMap[props.type]["text"]}
-               />);
+        return (
+          <StudyIcon
+            className={style.popupSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
       case "ART":
-         return (<ArtIcon 
-                  className={style.popupSubicon}
-                  title={pinTypesMap[props.type]["text"]}
-                />);
+        return (
+          <ArtIcon
+            className={style.popupSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
       case "DINING":
-         return (<DiningIcon 
-                  className={style.popupSubicon}
-                  title={pinTypesMap[props.type]["text"]}
-                />);
+        return (
+          <DiningIcon
+            className={style.popupSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
       default:
-         return (<GenericIcon className={style.popupSubicon}/>);
+        return <GenericIcon className={style.popupSubicon} />;
     }
   }
 
@@ -48,7 +54,8 @@ function Pin(props) {
       icon={
         new Icon({
           iconUrl: pinTypesMap[props.type]["iconUrl"],
-          shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+          shadowUrl:
+            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
           iconSize: [25, 41],
           iconAnchor: [13, 41],
         })
@@ -56,31 +63,25 @@ function Pin(props) {
     >
       {props.id === undefined ? null : (
         <Popup>
-         <div className={style.popup} >
+          <div className={style.popup}>
             <div className={style.popupTopBar}>
-               <h2>{props.title}</h2>
-               <TypeIcon type={props.type} />
+              <h2>{props.title}</h2>
+              <TypeIcon type={props.type} />
             </div>
             <p>{props.description}</p>
             <div className={style.popupBottomBar}>
-               <ThumbsUp 
-                  className={style.popupSubicon}
-                  title="Upvotes" 
-               />
-               <span>{props.upvotes}</span>
-               <ThumbsDown
-                  className={style.popupSubicon}
-                  title="Downvotes"    
-               />
-               <span>{props.downvotes}</span>
-               <Link 
-                  className={style.expandIconWrapper}
-                  to="locations/new" 
-               >
-                  <MaximizeIcon className={style.expandIcon} />
-               </Link>
+              <ThumbsUp className={style.popupSubicon} title="Upvotes" />
+              <span>{props.upvotes}</span>
+              <ThumbsDown className={style.popupSubicon} title="Downvotes" />
+              <span>{props.downvotes}</span>
+              <Link
+                className={style.expandIconWrapper}
+                to="locations/INSERT_ID_HERE"
+              >
+                <MaximizeIcon className={style.expandIcon} />
+              </Link>
             </div>
-         </div>
+          </div>
         </Popup>
       )}
     </Marker>

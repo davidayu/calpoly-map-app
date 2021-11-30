@@ -1,28 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
 
 :root {
-   /* --header-text-color: #000000;
+  /* --header-text-color: #000000;
    --header-bg-color: #ffffff;
    --header-bg-color-hover: #f2f2f2;
    --navbar-text-color: #ffffff;
    --navbar-bg-color: #2f2f2f;
-   --navbar-bg-color-hover: #464646; */;
+   --navbar-bg-color-hover: #464646; */
 }
 
 * {
-   font-family:'Noto Sans', sans-serif;
-   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-   margin: 0;
-   border: 0;
-   padding: 0;
+  font-family: "Noto Sans", sans-serif;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
-input[type=text], textarea, button {
-   -webkit-transition: all 0.20s ease-in-out;
-   -moz-transition: all 0.20s ease-in-out;
-   -ms-transition: all 0.20s ease-in-out;
-   -o-transition: all 0.20s ease-in-out;
-   transition: all 0.20s ease-in-out;
- }
+input[type="text"],
+textarea,
+button {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
