@@ -15,6 +15,7 @@ function Home() {
         if (response && response.status === 200) {
           setAllPins(response.data.pins_list);
           setSearchedPins(response.data.pins_list);
+          console.log(response.data);
         }
       })
       .catch((error) => console.log(error));
@@ -31,7 +32,7 @@ function Home() {
         allPins={allPins}
         updateSearchedPins={updateSearchedPins}
       />
-      <Map searchedPins={searchedPins} />
+      <Map pins={searchedPins} />
       <InteractBar />
     </div>
   );

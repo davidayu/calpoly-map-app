@@ -1,13 +1,9 @@
-// import { svg } from "leaflet";
-
-import Home from "./Home";
+import Home from "../Home";
 import ReactDOM from "react-dom";
-
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
-
-import { ReactComponent as ThumbsUp } from "./svg/thumbs-up.svg";
-import { ReactComponent as ThumbsDown } from "./svg/thumbs-down.svg";
+import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
+import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
 
 function CommentViewHeader(props) {
   return (

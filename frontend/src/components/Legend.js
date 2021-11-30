@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ReactComponent as StudyIcon } from "./study-icon.svg";
-import { ReactComponent as EatingIcon } from "./eating-icon.svg";
-import { ReactComponent as BrushIcon } from "./brush-icon.svg";
-import { ReactComponent as ExpandIcon } from "./expand-icon.svg";
+import { ReactComponent as StudyIcon } from "./study.svg";
+import { ReactComponent as EatingIcon } from "../icons/eating.svg";
+import { ReactComponent as BrushIcon } from "../icons/brush.svg";
+import { ReactComponent as ExpandIcon } from "../icons/expand.svg";
 import axios from "axios";
 
 function Legend(props) {

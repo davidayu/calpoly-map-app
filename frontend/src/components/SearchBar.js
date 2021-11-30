@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ReactComponent as SearchIcon } from "./svg/search.svg";
+import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import axios from "axios";
 
 function SearchBar(props) {

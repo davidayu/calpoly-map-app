@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ReactComponent as ListIcon } from "./svg/list.svg";
-import { ReactComponent as AddPinIcon } from "./svg/file-plus.svg";
+import { ReactComponent as ListIcon } from "../icons/list.svg";
+import { ReactComponent as AddPinIcon } from "../icons/file-plus.svg";
 import ListView from "./ListView";
 import LocationForm from "./LocationForm";
 

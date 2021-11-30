@@ -109,7 +109,7 @@ app.delete("/comments/:id", async (req, res) => {
 app.get("/comments", async (req, res) => {
   const id = req.query.id;
   let result = await commentServices.getComments(id);
-  result = { comment: result };
+  result = { comments_list: result };
   res.send(result);
 });
 
