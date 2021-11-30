@@ -7,12 +7,12 @@ const dotenv = require("dotenv").config({ path: "database.env" });
 let conn;
 
 const uri = process.env.DB_URI;
-mongoose
+/*mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log(error));*/
 
 function setConnection(newConn) {
   return (conn = newConn);
