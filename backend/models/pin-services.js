@@ -1,7 +1,9 @@
-const dotenv = require("dotenv").config({ path: "database.env" });
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const pinSchema = require("./pin");
 const commentSchema = require("./comment");
+
+dotenv.config()
 
 const uri = process.env.DB_URI;
 
@@ -26,7 +28,7 @@ function getConnection() {
           process.env.MONGO_USER +
           ":" +
           process.env.MONGO_PWD +
-          "@csc307.7ijdm.mongodb.net/" +
+          "@calpolycluster.m4ncq.mongodb.net/" +
           process.env.MONGO_DB +
           "?retryWrites=true&w=majority",
         {

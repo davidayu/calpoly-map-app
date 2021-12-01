@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const test = 0;
 const commentSchema = require("./comment");
 const pinModel = require("./pin");
-const dotenv = require("dotenv").config({ path: "database.env" });
+const dotenv = require("dotenv")
+
+dotenv.config();
 
 let conn;
 
@@ -26,7 +28,7 @@ function getConnection() {
           process.env.MONGO_USER +
           ":" +
           process.env.MONGO_PWD +
-          "@csc307.7ijdm.mongodb.net/" +
+          "@calpolycluster.m4ncq.mongodb.net/" +
           process.env.MONGO_DB +
           "?retryWrites=true&w=majority",
         {
