@@ -42,7 +42,6 @@ beforeEach(async () => {
     downvotes: 5,
     pinType: "ART",
     indoor: true,
-    pinState: "NEW",
   };
   let result = new pinModel(dummyPin);
   await result.save();
@@ -56,7 +55,6 @@ beforeEach(async () => {
     downvotes: 3,
     pinType: "NONE",
     indoor: true,
-    pinState: "MINIMIZED",
   };
   result = new pinModel(dummyPin);
   await result.save();
@@ -70,7 +68,6 @@ beforeEach(async () => {
     downvotes: 5,
     pinType: "ART",
     indoor: false,
-    pinState: "MINIMIZED",
   };
   result = new pinModel(dummyPin);
   await result.save();
@@ -84,7 +81,6 @@ beforeEach(async () => {
     downvotes: 24,
     pinType: "DINING",
     indoor: true,
-    pinState: "MAXIMIZED",
   };
   result = new pinModel(dummyPin);
   await result.save();
@@ -110,7 +106,6 @@ test("Fetching pin by latitude and longitude", async () => {
   expect(result.downvotes).toBe(5);
   expect(result.pinType).toBe("ART");
   expect(result.indoor).toBe(false);
-  expect(result.pinState).toBe("MINIMIZED");
 });
 
 test("Fetching pin by invalid latitude and longitude", async () => {
@@ -128,7 +123,6 @@ test("Fetching pin by location", async () => {
   expect(result.downvotes).toBe(3);
   expect(result.pinType).toBe("NONE");
   expect(result.indoor).toBe(true);
-  expect(result.pinState).toBe("MINIMIZED");
 });
 
 test("Fetching pin by invalid location", async () => {
@@ -146,7 +140,6 @@ test("Fetching pin by type", async () => {
   expect(result.downvotes).toBe(3);
   expect(result.pinType).toBe("NONE");
   expect(result.indoor).toBe(true);
-  expect(result.pinState).toBe("MINIMIZED");
 });
 
 test("Fetching pin by invalid type", async () => {
@@ -164,7 +157,6 @@ test("Fetching by valid id and finding", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
@@ -177,7 +169,6 @@ test("Fetching by valid id and finding", async () => {
   expect(foundPin.downvotes).toBe(addedPin.downvotes);
   expect(foundPin.pinType).toBe(addedPin.pinType);
   expect(foundPin.indoor).toBe(addedPin.indoor);
-  expect(foundPin.pinState).toBe(addedPin.pinState);
 });
 
 test("Fetching by invalid id format", async () => {
@@ -202,7 +193,6 @@ test("Deleting a pin by Id -- successful path", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
@@ -224,9 +214,7 @@ test("Adding pin -- successful path", async () => {
     description: "wonderful classes",
     upvotes: 34,
     downvotes: 23,
-    pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = await pinServices.addPin(addedPin);
   expect(result).toBeTruthy();
@@ -234,9 +222,7 @@ test("Adding pin -- successful path", async () => {
   expect(result.description).toBe(addedPin.description);
   expect(result.upvotes).toBe(addedPin.upvotes);
   expect(result.downvotes).toBe(addedPin.downvotes);
-  expect(result.pinType).toBe(addedPin.pinType);
   expect(result.indoor).toBe(addedPin.indoor);
-  expect(result.pinState).toBe(addedPin.pinState);
   expect(result).toHaveProperty("_id");
 });
 
@@ -251,7 +237,6 @@ test("Adding pin -- failure path with invalid id", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = await pinServices.addPin(dummyPin);
   expect(result).toBeFalsy();
@@ -267,7 +252,6 @@ test("Adding pin -- failure path with already taken id", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
 
   const addedPin = await pinServices.addPin(dummyPin);
@@ -282,7 +266,6 @@ test("Adding pin -- failure path with already taken id", async () => {
     downvotes: 2,
     pinType: "STUDY",
     indoor: true,
-    pinState: "MINIMIZED",
   };
 
   const result = await pinServices.addPin(anotherDummyPin);
@@ -299,7 +282,6 @@ test("Upvote pin", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
@@ -312,7 +294,6 @@ test("Upvote pin", async () => {
   expect(upvotedPin.downvotes).toBe(addedPin.downvotes);
   expect(upvotedPin.pinType).toBe(addedPin.pinType);
   expect(upvotedPin.indoor).toBe(addedPin.indoor);
-  expect(upvotedPin.pinState).toBe(addedPin.pinState);
 });
 
 test("Downvote pin", async () => {
@@ -325,7 +306,6 @@ test("Downvote pin", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
@@ -338,7 +318,6 @@ test("Downvote pin", async () => {
   expect(upvotedPin.downvotes).toBe(24);
   expect(upvotedPin.pinType).toBe(addedPin.pinType);
   expect(upvotedPin.indoor).toBe(addedPin.indoor);
-  expect(upvotedPin.pinState).toBe(addedPin.pinState);
 });
 
 test("Add comment to pin - successful path", async () => {
@@ -356,7 +335,6 @@ test("Add comment to pin - successful path", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
@@ -384,7 +362,6 @@ test("Deleting comment from pin - successful path", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const addedPin = await pinServices.addPin(dummyPin);
   const addedComment = await pinServices.addCommentToPin(
@@ -404,7 +381,6 @@ test("Deleting comment from pin - successful path", async () => {
   expect(result.comments).toHaveLength(0);
   expect(result.pinType).toBe(addedPin.pinType);
   expect(result.indoor).toBe(addedPin.indoor);
-  expect(result.pinState).toBe(addedPin.pinState);
   expect(result).toHaveProperty("_id");
 });
 
@@ -423,7 +399,6 @@ test("Getting pin comments - successful path", async () => {
     downvotes: 23,
     pinType: "STUDY",
     indoor: true,
-    pinState: "NEW",
   };
   const addedPin = await pinServices.addPin(dummyPin);
   const addedComment = await pinServices.addCommentToPin(

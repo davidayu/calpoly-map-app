@@ -4,7 +4,7 @@
   "description": "https://www.figma.com/file/sQ51YyO4PbaaNVh6xXr76p/Map-UI-Mock-up?node-id=0%3A1",
   "main": "index.js",
   "scripts": {
-    "test": "prettier --check . && jest --detectOpenHandles",
+    "test": "prettier --check . && jest --coverage --detectOpenHandles",
     "dev": "nodemon backend.js",
     "start": "node backend.js"
   },
