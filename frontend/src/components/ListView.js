@@ -1,4 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import Home from "./Home";
+import ReactDOM from "react-dom";
+
+function goHome() {
+  //add browser router??
+  ReactDOM.render(<Home />, document.getElementById("root"));
+}
 
 function ListView(props) {
   //let listitems = getPins();
@@ -25,6 +32,13 @@ function ListView(props) {
   return (
     <div>
       <h1>List view</h1>
+      <button
+        onClick={goHome}
+        style={{ position: "absolute", right: 0, top: 0 }}
+      >
+        {" "}
+        X{" "}
+      </button>
       <p>
         {listitems.map((pin) => (
           <p style={{ outlineStyle: "groove", outlineColor: pin.color }}>
