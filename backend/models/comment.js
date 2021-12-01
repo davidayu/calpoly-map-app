@@ -16,6 +16,7 @@ const commentSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  versionKey: false
 });
 
 const Comment = mongoose.model("Comment", commentSchema);
