@@ -30,9 +30,10 @@ app.get("/pins", async (req, res) => {
     res.send(result);
   } else if (pinType != undefined) {
     let result = await pinServices.filterByType(pinType);
-    result = { pins_list: result };
-    if (!result) res.status(404).send("Resource not found.");
-    else {
+    if (!result) {
+      res.status(404).send("Resource not found.");
+    } else {
+      result = { pins_list: result };
       res.send(result);
     }
   } else {

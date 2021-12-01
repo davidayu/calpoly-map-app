@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "prettier --check .",
-    "dev": "nodemon backend.js --prod",
-    "start": "node backend.js --prod"
+    "dev": "nodemon backend.js",
+    "start": "node backend.js"
   },
   "repository": {
     "type": "git",
