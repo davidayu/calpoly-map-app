@@ -1,8 +1,8 @@
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { Icon } from "leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import { ReactComponent as ThumbsUp } from "./thumbs-up.svg";
-import { ReactComponent as ThumbsDown } from "./thumbs-down.svg";
+import { ReactComponent as ThumbsUp } from "./svg/thumbs-up.svg";
+import { ReactComponent as ThumbsDown } from "./svg/thumbs-down.svg";
 
 function Pin(props) {
   useMapEvents(

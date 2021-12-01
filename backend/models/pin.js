@@ -42,12 +42,7 @@ const pinSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  pinState: {
-    type: String,
-    enum: ["NEW", "MINIMIZED", "MAXIMIZED"],
-    default: "NEW",
-    trim: true,
-  },
+
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
