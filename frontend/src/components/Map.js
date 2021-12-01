@@ -36,7 +36,7 @@ function Map(props) {
         minZoom={7}
         maxZoom={18}
         style={{
-          height: "85vh",
+          height: props.height,
         }}
       >
         {displayPins()}

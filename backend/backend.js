@@ -30,9 +30,10 @@ app.get("/pins", async (req, res) => {
     res.send(result);
   } else if (pinType != undefined) {
     let result = await pinServices.filterByType(pinType);
-    if (result === undefined || result === null)
+    if (!result) {
       res.status(404).send("Resource not found.");
-    else {
+    } else {
+      result = { pins_list: result };
       res.send(result);
     }
   } else {
@@ -109,7 +110,7 @@ app.delete("/comments/:id", async (req, res) => {
 app.get("/comments", async (req, res) => {
   const id = req.query.id;
   let result = await commentServices.getComments(id);
-  result = { comment: result };
+  result = { comments_list: result };
   res.send(result);
 });
 
