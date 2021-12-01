@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ReactComponent as StudyIcon } from "./study.svg";
+import { ReactComponent as StudyIcon } from "../icons/study.svg";
 import { ReactComponent as EatingIcon } from "../icons/eating.svg";
 import { ReactComponent as BrushIcon } from "../icons/brush.svg";
 import { ReactComponent as ExpandIcon } from "../icons/expand.svg";

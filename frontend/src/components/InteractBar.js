@@ -1,23 +1,26 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
+import style from "../styles/InteractBar.module.css";
 import { ReactComponent as ListIcon } from "../icons/list.svg";
 import { ReactComponent as AddPinIcon } from "../icons/file-plus.svg";
-import ListView from "./ListView";
-import LocationForm from "./LocationForm";
-
-function ShowListView() {
-  ReactDOM.render(<ListView />, document.getElementById("root"));
-}
-
-function ShowLocationForm() {
-  ReactDOM.render(<LocationForm />, document.getElementById("root"));
-}
 
 function InteractBar() {
   return (
-    <div>
-      <ListIcon onClick={ShowListView} />
-      <AddPinIcon onClick={ShowLocationForm} />
+    <div className={style.interactBar}>
+      <Link 
+         className={style.iconWrapper}
+         to="/locations"
+         title="Locations feed"
+      >
+         <ListIcon className={style.icon} />
+      </Link>
+      <Link 
+         className={style.iconWrapper}
+         to="locations/new"
+         title="Submit a location"
+      >
+         <AddPinIcon className={style.icon} />
+      </Link>
     </div>
   );
 }

@@ -23,8 +23,7 @@
 .expandIcon {
   height: 1rem;
   width: 1rem;
-  color: #ffffff;
-  background: #f6565c;
+  color: var(--content-color);
 }
 
 .expandIconWrapper {
@@ -35,6 +34,10 @@
   margin-right: 0;
   height: 1.625rem;
   width: 1.625rem;
-  background: #f6565c;
+  background: var(--icon-color);
   border-radius: 50%;
+}
+
+.expandIconWrapper:hover {
+   background: var(--icon-color-hover);
 }

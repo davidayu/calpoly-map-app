@@ -3,15 +3,15 @@
   top: 1px;
   left: 1px;
   /* z-index of Leaflet popup is 700 */
-  z-index: 800;
+  z-index: 750;
   width: 25%;
-  background: #ffffff;
-  border: 1.5px solid #b0b0b0;
+  background: var(--content-color);
+  border: 1.5px solid var(--border-color);
   border-radius: 10px;
 }
 
 .searchIcon {
-  color: #ffffff;
+  color: var(--content-color);
   width: 1.25rem;
   height: 1.25rem;
 }
@@ -23,26 +23,27 @@
   width: 2rem;
   height: 2rem;
   margin-right: 0.5em;
-  background: #f6565c;
+  background: var(--icon-color);
   border-radius: 50%;
 }
 
 .searchIconWrapper:hover {
   cursor: pointer;
+  background: var(--icon-color-hover);
 }
 
 .searchInput {
   height: 2rem;
   width: calc(100% - 2.5rem);
-  font-size: 0.75rem;
-  padding: 0.75rem;
-  outline: 1.5px solid #dddddd;
+  font-size: 0.825rem;
+  padding: 0.75em;
+  outline: 1.5px solid var(--border-color-light);
   border-radius: 30px;
 }
 
 .searchInput:focus,
 .searchInput:focus-visible {
-  box-shadow: 0px 1px 5px 0px #f6565c;
+  box-shadow: 0px 1px 5px 0px var(--box-shadow-color);
 }
 
 .searchBox {
@@ -55,12 +56,13 @@
   display: block;
   width: 100%;
   background: white;
+  font-size: 0.825rem;
   padding: 0.5em;
   border-radius: 10px;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid var(--border-color-light);
 }
 
 .searchResult:hover {
   cursor: pointer;
-  background: #dddddd;
+  background: var(--content-color-hover);
 }
