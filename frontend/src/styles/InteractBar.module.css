@@ -1,36 +1,36 @@
 .interactBar {
-   position: absolute;
-   left: 1px;
-   bottom: 1px;
-   z-index: 750;
-   display: flex;
-   background: var(--content-color);
-   padding: 0.5rem;
-   border: 1.5px solid var(--border-color);
-   border-radius: 10px;
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  z-index: 750;
+  display: flex;
+  background: var(--content-color);
+  padding: 0.5rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
 }
 
 .icon {
-   color: var(--content-color);
-   width: 1.75rem;
-   height: 1.75rem;
+  color: var(--content-color);
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .iconWrapper {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   width: 3rem;
-   height: 3rem;
-   background: var(--icon-color);
-   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--icon-color);
+  border-radius: 50%;
 }
 
 .iconWrapper:hover {
-   cursor: pointer;
-   background: var(--icon-color-hover);
- }
+  cursor: pointer;
+  background: var(--icon-color-hover);
+}
 
- .iconWrapper + .iconWrapper {
-    margin-left: 0.5rem;
- }
+.iconWrapper + .iconWrapper {
+  margin-left: 0.5rem;
+}

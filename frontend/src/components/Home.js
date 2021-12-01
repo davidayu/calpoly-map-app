@@ -3,7 +3,7 @@ import style from "../styles/Home.module.css";
 import SearchBar from "./SearchBar";
 import Map from "./Map";
 import InteractBar from "./InteractBar";
-// import Legend from "./Legend";
+import Legend from "./Legend";
 import axios from "axios";
 
 function Home() {
@@ -32,7 +32,7 @@ function Home() {
       />
       <Map pins={searchedPins} height="100vh" />
       <InteractBar />
-      {/* <Legend /> */}
+      <Legend updateSearchedPins={updateSearchedPins} />
     </div>
   );
 }

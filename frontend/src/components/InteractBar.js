@@ -7,19 +7,19 @@ import { ReactComponent as AddPinIcon } from "../icons/file-plus.svg";
 function InteractBar() {
   return (
     <div className={style.interactBar}>
-      <Link 
-         className={style.iconWrapper}
-         to="/locations"
-         title="Locations feed"
+      <Link
+        className={style.iconWrapper}
+        to="/locations"
+        title="Locations feed"
       >
-         <ListIcon className={style.icon} />
+        <ListIcon className={style.icon} />
       </Link>
-      <Link 
-         className={style.iconWrapper}
-         to="locations/new"
-         title="Submit a location"
+      <Link
+        className={style.iconWrapper}
+        to="locations/new"
+        title="Submit a location"
       >
-         <AddPinIcon className={style.icon} />
+        <AddPinIcon className={style.icon} />
       </Link>
     </div>
   );

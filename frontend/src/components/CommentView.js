@@ -1,5 +1,3 @@
-// import Home from "../Home";
-import ReactDOM from "react-dom";
 import React, { useState } from "react";
 import Collapsible from "react-collapsible";
 import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";

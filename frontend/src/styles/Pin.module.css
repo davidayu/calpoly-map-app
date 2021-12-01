@@ -5,8 +5,8 @@
 .popupSubicon {
   height: 1.25rem;
   width: 1.25rem;
-  margin-left: 0.75em;
-  margin-right: 0.75em;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
 .popupTopBar {
@@ -39,5 +39,5 @@
 }
 
 .expandIconWrapper:hover {
-   background: var(--icon-color-hover);
+  background: var(--icon-color-hover);
 }

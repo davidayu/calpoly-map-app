@@ -1,8 +1,8 @@
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { Icon } from "leaflet";
 import { Link } from "react-router-dom";
-import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
-import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
+import { ReactComponent as ThumbsUpIcon } from "../icons/thumbs-up.svg";
+import { ReactComponent as ThumbsDownIcon } from "../icons/thumbs-down.svg";
 import { ReactComponent as StudyIcon } from "../icons/study.svg";
 import { ReactComponent as ArtIcon } from "../icons/brush.svg";
 import { ReactComponent as DiningIcon } from "../icons/eating.svg";
@@ -70,9 +70,12 @@ function Pin(props) {
             </div>
             <p>{props.description}</p>
             <div className={style.popupBottomBar}>
-              <ThumbsUp className={style.popupSubicon} title="Upvotes" />
+              <ThumbsUpIcon className={style.popupSubicon} title="Upvotes" />
               <span>{props.upvotes}</span>
-              <ThumbsDown className={style.popupSubicon} title="Downvotes" />
+              <ThumbsDownIcon
+                className={style.popupSubicon}
+                title="Downvotes"
+              />
               <span>{props.downvotes}</span>
               <Link
                 className={style.expandIconWrapper}
