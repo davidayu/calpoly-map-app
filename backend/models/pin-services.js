@@ -5,6 +5,8 @@ const commentSchema = require("./comment");
 
 const uri = process.env.DB_URI;
 
+let conn;
+
 /*mongoose
   .connect(uri, {
     useNewUrlParser: true,
