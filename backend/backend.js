@@ -72,7 +72,7 @@ app.put("/pins/upvote/:id", async (req, res) => {
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.upvotePin(id);
-    res.status(204).end();
+    res.status(201).send(pin);
   }
 });
 
@@ -82,7 +82,7 @@ app.put("/pins/downvote/:id", async (req, res) => {
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.downvotePin(id);
-    res.status(204).end();
+    res.status(201).send(pin);
   }
 });
 
@@ -119,7 +119,7 @@ app.put("/comments/upvote/:id", async (req, res) => {
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {
     await commentServices.upvoteComment(id);
-    res.status(204).end();
+    res.status(201).send(comment);
   }
 });
 
@@ -129,7 +129,7 @@ app.put("/comments/downvote/:id", async (req, res) => {
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {
     await commentServices.downvoteComment(id);
-    res.status(204).end();
+    res.status(201).send(comment);
   }
 });
 

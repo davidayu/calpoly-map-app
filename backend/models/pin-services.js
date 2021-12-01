@@ -66,6 +66,7 @@ async function upvotePin(id) {
     result = await pinModel.findById(id);
     result.upvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -78,6 +79,7 @@ async function downvotePin(id) {
     result = await pinModel.findById(id);
     result.downvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;

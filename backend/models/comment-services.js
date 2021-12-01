@@ -51,6 +51,7 @@ async function upvoteComment(id) {
     result = await commentModel.findById(id);
     result.upvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -63,6 +64,7 @@ async function downvoteComment(id) {
     result = await commentModel.findById(id);
     result.downvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
