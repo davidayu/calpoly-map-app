@@ -1,19 +1,50 @@
 const dotenv = require("dotenv").config({ path: "database.env" });
 const mongoose = require("mongoose");
-const pinModel = require("./pin");
-const commentModel = require("./comment");
+const pinSchema = require("./pin");
+const commentSchema = require("./comment");
 
 const uri = process.env.DB_URI;
 
-mongoose
+/*mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log(error));*/
+
+function setConnection(newConn) {
+  return (conn = newConn);
+}
+
+function getConnection() {
+  if (!conn) {
+    if (process.argv.includes("--prod")) {
+      conn = mongoose.createConnection(
+        "mongodb+srv://" +
+          process.env.MONGO_USER +
+          ":" +
+          process.env.MONGO_PWD +
+          "@csc307.7ijdm.mongodb.net/" +
+          process.env.MONGO_DB +
+          "?retryWrites=true&w=majority",
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }
+      );
+    } else {
+      conn = mongoose.createConnection("mongodb://localhost:27017/users", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+    }
+  }
+  return conn;
+}
 
 async function addPin(pin) {
   try {
+    const pinModel = getConnection().model("Pin", pinSchema);
     const pinToAdd = new pinModel(pin);
     const savedPin = await pinToAdd.save();
     return savedPin;
@@ -25,6 +56,7 @@ async function addPin(pin) {
 
 async function getPins(lat, lon) {
   let result;
+  const pinModel = getConnection().model("Pin", pinSchema);
   if (lat === undefined || lon === undefined) {
     result = await pinModel.find();
   } else {
@@ -35,6 +67,7 @@ async function getPins(lat, lon) {
 
 async function findPinByLocation(title) {
   let result;
+  const pinModel = getConnection().model("Pin", pinSchema);
   if (title === undefined) {
     result = await pinModel.find();
   } else {
@@ -45,11 +78,13 @@ async function findPinByLocation(title) {
 }
 
 async function findPinByCoords(lat, lon) {
+  const pinModel = getConnection().model("Pin", pinSchema);
   return await pinModel.find({ lat: lat, lon: lon });
 }
 
 async function findPinById(id) {
   try {
+    const pinModel = getConnection().model("Pin", pinSchema);
     return await pinModel.findById(id);
   } catch (error) {
     console.log(error);
@@ -58,12 +93,14 @@ async function findPinById(id) {
 }
 
 async function removePin(id) {
+  const pinModel = getConnection().model("Pin", pinSchema);
   return await pinModel.findByIdAndDelete({ _id: id });
 }
 
 async function upvotePin(id) {
   let result;
   try {
+    const pinModel = getConnection().model("Pin", pinSchema);
     result = await pinModel.findById(id);
     result.upvotes += 1;
     await result.save();
@@ -72,11 +109,13 @@ async function upvotePin(id) {
     console.log(error);
     return undefined;
   }
+  return result;
 }
 
 async function downvotePin(id) {
   let result;
   try {
+    const pinModel = getConnection().model("Pin", pinSchema);
     result = await pinModel.findById(id);
     result.downvotes += 1;
     await result.save();
@@ -85,11 +124,13 @@ async function downvotePin(id) {
     console.log(error);
     return undefined;
   }
+  return result;
 }
 
 async function addCommentToPin(pinID, comment) {
   let pin = await findPinById(pinID);
   try {
+    const commentModel = getConnection().model("Comment", commentSchema);
     const commentToAdd = new commentModel(comment);
     const savedComment = await commentToAdd.save();
     pin.comments.push(commentToAdd._id);
@@ -116,6 +157,7 @@ async function removeCommentFromPin(pinID, commentID) {
 async function getPinComments(id) {
   let pin;
   try {
+    const pinModel = getConnection().model("Pin", pinSchema);
     pin = await pinModel.findById(id).populate("comments");
     return pin.comments;
   } catch (error) {
@@ -126,6 +168,7 @@ async function getPinComments(id) {
 
 async function filterByType(pinType) {
   let result;
+  const pinModel = getConnection().model("Pin", pinSchema);
   if (pinType === undefined) {
     result = await pinModel.find();
   } else {
@@ -134,6 +177,7 @@ async function filterByType(pinType) {
   return result;
 }
 
+exports.setConnection = setConnection;
 exports.addPin = addPin;
 exports.getPins = getPins;
 exports.findPinByCoords = findPinByCoords;

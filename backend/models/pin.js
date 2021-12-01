@@ -46,6 +46,4 @@ const pinSchema = new mongoose.Schema({
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
-const Pin = mongoose.model("Pin", pinSchema);
-
-module.exports = Pin;
+module.exports = pinSchema;
