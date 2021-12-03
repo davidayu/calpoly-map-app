@@ -11,7 +11,9 @@ https://www.figma.com/file/sQ51YyO4PbaaNVh6xXr76p/Map-UI-Mock-up?node-id=0%3A1
 
 Class diagram (last updated October 22, 2021): https://drive.google.com/file/d/1SU9oplYUWC5pPwjIznS2CK1LfgTxi-UB/view?usp=sharing 
 
-Deployment/component diagram (CHANGE ACCESS TO PUBLIC AND ADD LAST MODIFIED DATE): https://drive.google.com/file/d/1gWzPfoUjDjCIYsWka3lRYPs5e31f6ZOF/view 
+Deployment/component diagram (CHANGE ACCESS TO PUBLIC AND ADD LAST MODIFIED DATE): https://drive.google.com/file/d/1gWzPfoUjDjCIYsWka3lRYPs5e31f6ZOF/view
+
+Code coverage report: TO-DO
 
 User interface icons obtained from:
 https://feathericons.com/
