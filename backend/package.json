@@ -4,9 +4,9 @@
   "description": "https://www.figma.com/file/sQ51YyO4PbaaNVh6xXr76p/Map-UI-Mock-up?node-id=0%3A1",
   "main": "index.js",
   "scripts": {
-    "test": "prettier --check .",
-    "dev": "nodemon backend.js",
-    "start": "node backend.js"
+    "test": "prettier --check . && jest --detectOpenHandles",
+    "dev": "nodemon backend.js --prod",
+    "start": "node backend.js --prod"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,12 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.14"
+    "mongoose": "^6.0.14",
+    "mongodb-memory-server": "^8.0.2",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
+    "jest": "^27.4.0",
     "prettier": "2.4.1"
   }
 }
