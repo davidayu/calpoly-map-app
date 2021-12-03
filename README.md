@@ -7,7 +7,6 @@ UI prototype (last updated October 25, 2021): https://www.figma.com/file/sQ51YyO
 Developer environment setup: TO-DO
     
 Remote database: https://cloud.mongodb.com/v2/6176ee4f1887fe5a8e741bbf#clusters
-https://www.figma.com/file/sQ51YyO4PbaaNVh6xXr76p/Map-UI-Mock-up?node-id=0%3A1
 
 Class diagram (last updated October 22, 2021): https://drive.google.com/file/d/1SU9oplYUWC5pPwjIznS2CK1LfgTxi-UB/view?usp=sharing 
 
