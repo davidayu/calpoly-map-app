@@ -10,13 +10,11 @@ MONGO_PWD="<password>"
 MONGO_DB="<database_name>"'.
 Next, navigate to the frontend folder and add another file titled '.env' with the following line:
 'REACT_APP_API_HOST="http://localhost:5000"'. 
-Finally from the backend folder, run 'node backend.js' and from a separate terminal, run 'npm start'. The app will be launched in a browser.
-    
-Remote database: https://cloud.mongodb.com/v2/6176ee4f1887fe5a8e741bbf#clusters
+Finally from the backend folder, run 'node backend.js' and from a separate terminal, run 'npm run dev'. The app will be launched in a browser.
 
 Class diagram (last updated October 22, 2021): https://drive.google.com/file/d/1SU9oplYUWC5pPwjIznS2CK1LfgTxi-UB/view?usp=sharing 
 
-Deployment/component diagram (CHANGE ACCESS TO PUBLIC AND ADD LAST MODIFIED DATE): https://drive.google.com/file/d/1gWzPfoUjDjCIYsWka3lRYPs5e31f6ZOF/view
+Deployment/component diagram (last updated October 25, 2021): https://drive.google.com/file/d/1gWzPfoUjDjCIYsWka3lRYPs5e31f6ZOF/view
 
 Code coverage report: (last updated Dec 3, 2021): 
 
