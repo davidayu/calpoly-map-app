@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Map from "./Map";
 import axios from "axios";
+import Home from "./Home";
+import ReactDOM from "react-dom";
 
 function LocationForm() {
   const [position, setPosition] = useState(null);
@@ -8,6 +10,10 @@ function LocationForm() {
   const [description, setDescription] = useState("");
   const [indoor, setIndoor] = useState(false);
   const [type, setType] = useState("STUDY");
+
+  function goHome(){
+    ReactDOM.render(<Home />, document.getElementById("root"));
+  }
 
   function handleMapClick(pos) {
     setPosition(pos);
@@ -52,6 +58,13 @@ function LocationForm() {
   return (
     <div>
       <h1>Submit a new location</h1>
+      <button
+        onClick={goHome}
+        style={{ position: "absolute", right: 0, top: 0 }}
+      >
+        {" "}
+        X{" "}
+      </button>
       <Map
         newPinPosition={position}
         handleMapClick={handleMapClick}

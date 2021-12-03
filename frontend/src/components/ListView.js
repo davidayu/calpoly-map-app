@@ -11,7 +11,7 @@ function goHome(){
 }
 
 function ListView(props) {
-  
+
   async function getAllPins(){
     try {
        const response = await axios.get('http://localhost:5000/pins');
@@ -22,7 +22,7 @@ function ListView(props) {
        return false;
     }
   }
-  
+
   async function upvotePin(id){
     try {
        let i = -1;
@@ -47,7 +47,7 @@ function ListView(props) {
        return false;
     }
   }
-  
+
   async function downvotePin(id){
     try {
        let i = -1;
