@@ -19,7 +19,7 @@ Class diagram (last updated October 22, 2021): https://drive.google.com/file/d/1
 Deployment/component diagram (CHANGE ACCESS TO PUBLIC AND ADD LAST MODIFIED DATE): https://drive.google.com/file/d/1gWzPfoUjDjCIYsWka3lRYPs5e31f6ZOF/view
 
 Code coverage report: (last updated Dec 3, 2021): 
-    ---------------------|---------|----------|---------|---------|------------------------------------------------------
+
 File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                    
 ---------------------|---------|----------|---------|---------|------------------------------------------------------
 All files            |   85.71 |       50 |     100 |   85.71 |                                                      
@@ -27,7 +27,6 @@ All files            |   85.71 |       50 |     100 |   85.71 |
  comment.js          |     100 |      100 |     100 |     100 |                                                      
  pin-services.js     |   82.47 |    58.33 |     100 |   82.47 | 25-40,76,113-116,128-131,144-145,156-157,168-169,177 
  pin.js              |     100 |      100 |     100 |     100 |                                                      
----------------------|---------|----------|---------|---------|------------------------------------------------------
 
 Test Suites: 2 passed, 2 total
 Tests:       34 passed, 34 total
