@@ -3,15 +3,12 @@ import Home from "./Home";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
-
-import { ReactComponent as ThumbsUp } from "./thumbs-up.svg";
-import { ReactComponent as ThumbsDown } from "./thumbs-down.svg";
+import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
+import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
 
 function goHome(){
   ReactDOM.render(<Home />, document.getElementById("root"));
 }
-
-
 
 function ListView(props) {
   
@@ -28,8 +25,21 @@ function ListView(props) {
   
   async function upvotePin(id){
     try {
+       let i = -1;
        const response = await axios.put('http://localhost:5000/pins/upvote/' + id, id);
-       setList(response.data);
+       console.log(response);
+       let pin = listItems.find((item) => item._id === id);
+       console.log(pin);
+       let newList = listItems;
+       listItems.forEach((item, index) => {
+        if (item._id == id){
+          i = index;
+        }
+       });
+       newList[i] = response.data;
+       console.log(i);
+       console.log([...listItems].indexOf(pin));
+       setList([...newList]);
        return response;
     }
     catch (error) {
@@ -40,7 +50,17 @@ function ListView(props) {
   
   async function downvotePin(id){
     try {
+       let i = -1;
        const response = await axios.put('http://localhost:5000/pins/downvote/' + id, id);
+       let pin = listItems.find((item) => item._id === id);
+       let newList = listItems;
+       listItems.forEach((item, index) => {
+        if (item._id == id){
+          i = index;
+        }
+       });
+       newList[i] = response.data;
+       setList([...newList]);
        return response;
     }
     catch (error) {
@@ -49,28 +69,7 @@ function ListView(props) {
     }
   }
 
-  //let listitems = getPins();
-
   const [listItems, setList] = useState([]);
-  /*let listItems = [
-    {
-      title: "Study Bench",
-      description: "Nice stone bench with shade from trees",
-      upVotes: 3,
-      downVotes: 4,
-      pinType: "Study Location",
-      color: "green",
-    },
-    {
-      title: "Favorite place to eat by foodtrucks",
-      description: "Picnic chairs on lawn by the gym",
-      upVotes: 13,
-      downVotes: 14,
-      pinType: "Eating Location",
-      color: "red",
-    },
-  ];*/
-  
 
     useEffect(() => {
       getAllPins().then( result => {
@@ -80,14 +79,16 @@ function ListView(props) {
       });
   }, [] );
 
-  //listItems = getAllPins();
-  console.log('access');
-  //console.log(getAllPins());
-
   return (
     <div>
       <h1>List view</h1>
-      <button onClick={goHome} style={{position: 'absolute',right: 0,top: 0,}}> X  </button>
+      <button
+        onClick={goHome}
+        style={{ position: "absolute", right: 0, top: 0 }}
+      >
+        {" "}
+        X{" "}
+      </button>
       <p>
         {listItems.map((pin) => (
           <p style={{ outlineStyle: "groove", outlineColor: pin.color }}>

@@ -1,6 +1,7 @@
 const dotenv = require("dotenv").config({ path: "database.env" });
 const mongoose = require("mongoose");
 const pinModel = require("./pin");
+const commentModel = require("./comment");
 
 const uri = process.env.DB_URI;
 
@@ -66,6 +67,7 @@ async function upvotePin(id) {
     result = await pinModel.findById(id);
     result.upvotes += 1;
     await result.save();
+    return result;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -78,6 +80,44 @@ async function downvotePin(id) {
     result = await pinModel.findById(id);
     result.downvotes += 1;
     await result.save();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function addCommentToPin(pinID, comment) {
+  let pin = await findPinById(pinID);
+  try {
+    const commentToAdd = new commentModel(comment);
+    const savedComment = await commentToAdd.save();
+    pin.comments.push(commentToAdd._id);
+    await pin.save();
+    return savedComment;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function removeCommentFromPin(pinID, commentID) {
+  let pin = await findPinById(pinID);
+  try {
+    pin.comments.pull(commentID);
+    const savedPin = await pin.save();
+    return savedPin;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+}
+
+async function getPinComments(id) {
+  let pin;
+  try {
+    pin = await pinModel.findById(id).populate("comments");
+    return pin.comments;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -103,3 +143,6 @@ exports.findPinByLocation = findPinByLocation;
 exports.upvotePin = upvotePin;
 exports.downvotePin = downvotePin;
 exports.filterByType = filterByType;
+exports.addCommentToPin = addCommentToPin;
+exports.getPinComments = getPinComments;
+exports.removeCommentFromPin = removeCommentFromPin;

@@ -52,7 +52,11 @@ function LocationForm() {
   return (
     <div>
       <h1>Submit a new location</h1>
-      <Map position={position} handleMapClick={handleMapClick}></Map>
+      <Map
+        newPinPosition={position}
+        handleMapClick={handleMapClick}
+        height="65vh"
+      />
       <form>
         <label htmlFor="title"> Location Name </label>
         <input
