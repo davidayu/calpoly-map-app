@@ -8,8 +8,8 @@ import { ReactComponent as ArtIcon } from "../icons/brush.svg";
 import { ReactComponent as DiningIcon } from "../icons/eating.svg";
 import { ReactComponent as GenericIcon } from "../icons/marker.svg";
 import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
-import { pinTypesMap } from "../pinTypes.js";
 import style from "../styles/Pin.module.css";
+import { pinTypesMap } from "../pinTypes.js";
 
 function Pin(props) {
   useMapEvents(
@@ -53,7 +53,7 @@ function Pin(props) {
       position={props.position}
       icon={
         new Icon({
-          iconUrl: pinTypesMap[props.type]["iconUrl"],
+          iconUrl: props.iconUrl,
           shadowUrl:
             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
           iconSize: [25, 41],

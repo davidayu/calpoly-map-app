@@ -30,7 +30,11 @@ function Home() {
         searchedPins={searchedPins}
         updateSearchedPins={updateSearchedPins}
       />
-      <Map pins={searchedPins} height="100vh" />
+      <Map 
+         pins={searchedPins} 
+         height="100vh" 
+         width="100vw"
+      />
       <InteractBar />
       <Legend updateSearchedPins={updateSearchedPins} />
     </div>

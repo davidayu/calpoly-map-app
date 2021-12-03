@@ -55,7 +55,8 @@ function LocationForm() {
       <Map
         newPinPosition={position}
         handleMapClick={handleMapClick}
-        height="65vh"
+        height="100vh"
+        width="100vw"
       />
       <form>
         <label htmlFor="title"> Location Name </label>
