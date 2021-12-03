@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const pinSchema = require("./pin");
 const commentSchema = require("./comment");
 
-dotenv.config()
+dotenv.config();
 
 const uri = process.env.DB_URI;
 
