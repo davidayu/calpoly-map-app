@@ -39,6 +39,8 @@ jobs:
 
   build-frontend:
     runs-on: ubuntu-latest
+    env:
+      CI: false
     defaults:
       run:
         working-directory: frontend
@@ -59,7 +61,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       #- uses: akhileshns/heroku-deploy@v3.12.12
-        #with:
-          #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          #heroku_app_name: "calpoly-map-app-frontend"
-          #heroku_email: "nomarx@calpoly.edu"
+      #with:
+      #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #heroku_app_name: "calpoly-map-app-frontend"
+      #heroku_email: "nomarx@calpoly.edu"
