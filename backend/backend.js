@@ -78,6 +78,7 @@ app.put("/pins/upvote/:id", async (req, res) => {
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.upvotePin(id);
+    pin = await pinServices.findPinById(id);
     res.status(201).send(pin);
   }
 });
@@ -88,6 +89,7 @@ app.put("/pins/downvote/:id", async (req, res) => {
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
     await pinServices.downvotePin(id);
+    pin = await pinServices.findPinById(id);
     res.status(201).send(pin);
   }
 });

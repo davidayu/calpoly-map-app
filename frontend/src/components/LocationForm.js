@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import Map from "./Map";
 import axios from "axios";
+<<<<<<< HEAD
 import { pinTypesMap } from "../pinTypes.js";
 import style from "../styles/LocationForm.module.css";
+=======
+import Home from "./Home";
+import ReactDOM from "react-dom";
+>>>>>>> origin/main
 
 function LocationForm() {
   const [position, setPosition] = useState(null);
@@ -10,6 +15,10 @@ function LocationForm() {
   const [description, setDescription] = useState("");
   const [indoor, setIndoor] = useState(false);
   const [type, setType] = useState(Object.keys(pinTypesMap)[0]);
+
+  function goHome(){
+    ReactDOM.render(<Home />, document.getElementById("root"));
+  }
 
   function handleMapClick(pos) {
     setPosition(pos);
@@ -52,7 +61,19 @@ function LocationForm() {
   }
 
   return (
+<<<<<<< HEAD
     <div className={style.locationForm}>
+=======
+    <div>
+      <h1>Submit a new location</h1>
+      <button
+        onClick={goHome}
+        style={{ position: "absolute", right: 0, top: 0 }}
+      >
+        {" "}
+        X{" "}
+      </button>
+>>>>>>> origin/main
       <Map
         newPinPosition={position}
         handleMapClick={handleMapClick}

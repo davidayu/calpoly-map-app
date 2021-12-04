@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const test = 0;
 const commentSchema = require("./comment");
 const pinModel = require("./pin");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
 
 dotenv.config();
 
