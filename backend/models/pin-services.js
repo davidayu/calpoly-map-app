@@ -162,6 +162,7 @@ async function getPinComments(id) {
   let pin;
   try {
     const pinModel = getConnection().model("Pin", pinSchema);
+    const commentModel = getConnection().model("Comment", commentSchema);
     pin = await pinModel.findById(id).populate("comments");
     return pin.comments;
   } catch (error) {

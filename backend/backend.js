@@ -92,7 +92,7 @@ app.put("/pins/downvote/:id", async (req, res) => {
   }
 });
 
-app.get("/pins/:id/comments/", async (req, res) => {
+app.get("/pins/:id/comments", async (req, res) => {
   const id = req.params["id"];
   let result = await pinServices.getPinComments(id);
   try {

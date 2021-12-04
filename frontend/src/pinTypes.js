@@ -10,12 +10,12 @@ export const pinTypesMap = {
       "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
   },
   DINING: {
-    text: "Art",
+    text: "Dining",
     iconUrl:
       "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png",
   },
   NONE: {
-    text: "Art",
+    text: "None",
     iconUrl:
       "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png",
   },

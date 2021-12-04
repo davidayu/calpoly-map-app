@@ -34,6 +34,7 @@ function Home() {
          pins={searchedPins} 
          height="100vh" 
          width="100vw"
+         center={[35.3, -120.66]}
       />
       <InteractBar />
       <Legend updateSearchedPins={updateSearchedPins} />

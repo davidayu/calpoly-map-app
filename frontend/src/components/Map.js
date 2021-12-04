@@ -3,7 +3,6 @@ import Pin from "./Pin";
 import { pinTypesMap } from "../pinTypes.js";
 
 function Map(props) {
-  const defaultPosition = [35.3, -120.66];
 
   function enumeratePins() {
     if (props.pins)
@@ -33,7 +32,7 @@ function Map(props) {
   return (
     <div className="map__container">
       <MapContainer
-        center={defaultPosition}
+        center={props.center}
         zoom={14}
         zoomControl={false}
         minZoom={7}

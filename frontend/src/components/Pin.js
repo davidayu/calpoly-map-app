@@ -8,12 +8,13 @@ import { ReactComponent as ArtIcon } from "../icons/brush.svg";
 import { ReactComponent as DiningIcon } from "../icons/eating.svg";
 import { ReactComponent as GenericIcon } from "../icons/marker.svg";
 import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
-import style from "../styles/Pin.module.css";
 import { pinTypesMap } from "../pinTypes.js";
+import style from "../styles/Pin.module.css";
+
 
 function Pin(props) {
   useMapEvents(
-    props.handleMapClick === undefined
+    !props.handleMapClick
       ? {}
       : {
           click: (event) => props.handleMapClick(event.latlng),
@@ -48,7 +49,7 @@ function Pin(props) {
     }
   }
 
-  return props.position === null ? null : (
+  return !props.position ? null : (
     <Marker
       position={props.position}
       icon={
@@ -61,7 +62,7 @@ function Pin(props) {
         })
       }
     >
-      {props.id === undefined ? null : (
+      {!props.id ? null : (
         <Popup>
           <div className={style.popup}>
             <div className={style.popupTopBar}>
@@ -79,7 +80,7 @@ function Pin(props) {
               <span>{props.downvotes}</span>
               <Link
                 className={style.expandIconWrapper}
-                to="locations/INSERT_ID_HERE"
+                to={`locations/${props.id}`}
               >
                 <MaximizeIcon className={style.expandIcon} />
               </Link>
