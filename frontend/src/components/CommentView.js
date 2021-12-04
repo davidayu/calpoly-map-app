@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Collapsible from "react-collapsible";
 import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
 import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
 import { ReactComponent as Close } from "../icons/close.svg";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-
-// function Comment(props) {
-//     return (
-//       <Collapsible key={props.index} trigger="▼/▲" open="true">
-//         {text.description} <br></br>
-//         <ThumbsUp title="Upvotes" onClick={() => props.upVote(index)} />{" "}
-//         {text.upvotes}
-//         <ThumbsDown
-//           title="Downvotes"
-//           onClick={() => props.downVote(index)}
-//         />{" "}
-//         {text.downvotes}
-//       </Collapsible>
-//     );
-//   });
-//   return <div>{_comments}</div>;
-// }
 
 function CommentView() {
 
@@ -32,26 +14,14 @@ function CommentView() {
    const [comments, setComments] = useState([]);
    const [newComment, setNewComment] = useState("");
 
-   function Header(props) {
-      return !props.location ? null :
-            (<div>
-               <h2 style={{ fontSize: 20 }}>{props.location.title}</h2>
-               <button onClick={() => navigate(-1)} >
-                  <Close />
-               </button>
-               <p>{props.location.description}</p>
-            </div>)
-   }
-
    useEffect(() => {
       const id = params.id;
-      console.log(id);
       axios
         .get(`${process.env.REACT_APP_API_HOST}/pins/${id}`)
         .then((response) => {
           if (response && response.status === 200) {
-            setLocation(response.data);
-            console.log(response.data);
+            let fetchedLocation = response.data;
+            setLocation(fetchedLocation);
           }
         })
         .catch((error) => console.log(error));
@@ -59,55 +29,224 @@ function CommentView() {
         .get(`${process.env.REACT_APP_API_HOST}/pins/${id}/comments`)
         .then((response) => {
           if (response && response.status === 200) {
-            setComments(response.data);
-            console.log(response.data);
+             setComments(response.data);
           }
         })
         .catch((error) => console.log(error));
     }, [params]);
 
-//   function upVote(index) {
-//     let commentsTemp = comments;
-//     commentsTemp[index].upvotes += 1;
-//     setComments([...commentsTemp]);
-//   }
+    function handleLocationUpvote() {
+      if (location["upvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${location._id}/upvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocation = response.data;
+                  tempLocation["upvoted"] = false;
+                  setLocation(tempLocation);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!location["upvoted"] && !location["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${location._id}/upvotes`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocation = response.data;
+                  tempLocation["upvoted"] = true;
+                  setLocation(tempLocation);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+    }
 
-//   function downVote(index) {
-//     let commentsTemp = comments;
-//     commentsTemp[index].downvotes += 1;
-//     setComments([...commentsTemp]);
-//   }
+    function handleLocationDownvote() {
+      if (location["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${location._id}/downvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocation = response.data;
+                  tempLocation["downvoted"] = false;
+                  setLocation(tempLocation);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!location["upvoted"] && !location["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${location._id}/downvotes`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocation = response.data;
+                  tempLocation["downvoted"] = true;
+                  setLocation(tempLocation);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+    }
 
-//   function inputChange(event) {
-//     const { name, value } = event.target;
-//     console.log(comment);
-//     userSubmit(value);
-//   }
+    function handleCommentUpvote(index) {
+      const id = comments[index]["_id"];
+      if (comments[index]["upvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/comments/${id}/upvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempComments = comments.map(l => Object.assign({}, l));
+                  tempComments[index] = response.data;
+                  tempComments[index]["upvoted"] = false;
+                  setComments(tempComments);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!comments[index]["upvoted"] && !comments[index]["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/comments/${id}/upvotes`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempComments = comments.map(l => Object.assign({}, l));
+                  tempComments[index] = response.data;
+                  tempComments[index]["upvoted"] = true;
+                  setComments(tempComments);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+    }
 
-//   function commentSubmit() {
-//     console.log(comment); // replace with backend insert
-//     userSubmit("");
-//   }
+    function handleCommentDownvote(index) {
+      const id = comments[index]["_id"];
+      if (comments[index]["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/comments/${id}/downvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempComments = comments.map(l => Object.assign({}, l));
+                  tempComments[index] = response.data;
+                  tempComments[index]["downvoted"] = false;
+                  setComments(tempComments);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!comments[index]["upvoted"] && !comments[index]["downvoted"]) {
+
+         axios
+         .patch(`${process.env.REACT_APP_API_HOST}/comments/${id}/downvotes`)
+         .then((response) => {
+            if (response && response.status === 201) {
+               const tempComments = comments.map(l => Object.assign({}, l));
+               tempComments[index] = response.data;
+               tempComments[index]["downvoted"] = true;
+               setComments(tempComments);
+            }
+         })
+         .catch((error) => console.log(error));
+      }
+    }
+
+    function Header(props) {
+      return !props.location ? null :
+            (<div>
+               <h2>{props.location.title}</h2>
+               <button onClick={() => navigate(-1)} >
+                  <Close />
+               </button>
+               <p>{props.location.description}</p>
+               <button onClick={props.handleUpvote}>
+                  <ThumbsUp />
+               </button>
+               <span>{props.location.upvotes}</span>
+               <button onClick={props.handleDownvote}>
+                  <ThumbsDown />
+               </button>
+               <span>{props.location.downvotes}</span>
+            </div>)
+   }
+
+   function Comment(props) {
+      return (
+         <div>
+            <p>{props.comment.description}</p>
+            <button onClick={props.handleUpvote}>
+               <ThumbsUp />
+            </button>
+            <span>{props.comment.upvotes}</span>
+            <button onClick={props.handleDownvote}>
+               <ThumbsDown />
+            </button>
+            <span>{props.comment.downvotes}</span>
+
+         </div>
+      );
+   }
+
+  function handleChange(event) {
+    const { value } = event.target;
+    setNewComment(value);
+  }
+
+  function handleSubmit() {
+   if (newComment.length >= 2) {
+     const commentToPost = {
+       description: newComment,
+       upvotes: 0,
+       downvotes: 0,
+     };
+     axios
+       .post(`${process.env.REACT_APP_API_HOST}/pins/${location._id}/comments`, commentToPost)
+       .then((response) => {
+         if (response && response.status === 201) {
+           setNewComment("");
+           setComments([...comments, response.data])
+         }
+       })
+       .catch((error) => console.log(error));
+   }
+ }
 
   return (
     <div>
-
-      <Header location={location} />
-      {/* <CommentViewBody
-        commentsData={comments}
-        upVote={upVote}
-        downVote={downVote}
+      <Header 
+         location={location} 
+         handleUpvote={() => handleLocationUpvote()}
+         handleDownvote={() => handleLocationDownvote()}
       />
+      <div>
+         <h2>Comments</h2>
+         {comments.map((comment, index) => { 
+               return (
+                  <Comment
+                     key={comment._id} 
+                     comment={comment}
+                     handleUpvote={() => handleCommentUpvote(index)}
+                     handleDownvote={() => handleCommentDownvote(index)}
+                  />
+               );
+            }
+         )}
+      </div>
       <form id="usrSubmit">
-        <input
-          type="text"
-          name="userComment"
-          placeholder="Enter Comment"
-          onChange={inputChange}
-          value={comment}
-        />
-        <input type="button" onClick={() => commentSubmit()} value="Submit" />
-      </form> */}
+         <label htmlFor="comment" > 
+            Leave a comment 
+         </label>
+         <textarea
+            id="comment"
+            name="comment"
+            value={newComment}
+            onChange={handleChange}
+            autocomplete="off" 
+            autocorrect="off" 
+            autocapitalize="off" 
+            spellcheck="false"
+         />
+        <input type="button" onClick={() => handleSubmit()} value="Submit" />
+      </form>
     </div>
   );
 }

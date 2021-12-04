@@ -72,23 +72,27 @@ app.delete("/pins/:id", async (req, res) => {
   }
 });
 
-app.put("/pins/upvote/:id", async (req, res) => {
+app.patch("/pins/:id/upvotes", async (req, res) => {
   const id = req.params["id"];
+  const undo = Boolean((req.query.undo || ""));
+  const offset = (undo ? -1 : 1);
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
-    await pinServices.upvotePin(id);
+    await pinServices.upvotePin(id, offset);
     pin = await pinServices.findPinById(id);
     res.status(201).send(pin);
   }
 });
 
-app.put("/pins/downvote/:id", async (req, res) => {
+app.patch("/pins/:id/downvotes", async (req, res) => {
   const id = req.params["id"];
+  const undo = Boolean((req.query.undo || ""));
+  const offset = (undo ? -1 : 1);
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
-    await pinServices.downvotePin(id);
+    await pinServices.downvotePin(id, offset);
     pin = await pinServices.findPinById(id);
     res.status(201).send(pin);
   }
@@ -185,23 +189,27 @@ app.get("/comments", async (req, res) => {
   res.send(result);
 });
 
-app.put("/comments/upvote/:id", async (req, res) => {
+app.patch("/comments/:id/upvotes", async (req, res) => {
   const id = req.params["id"];
+  const undo = Boolean((req.query.undo || ""));
+  const offset = (undo ? -1 : 1);
   let comment = await commentServices.findCommentById(id);
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {
-    await commentServices.upvoteComment(id);
-    res.status(201).send(comment);
+    const newComment =await commentServices.upvoteComment(id, offset);
+    res.status(201).send(newComment);
   }
 });
 
-app.put("/comments/downvote/:id", async (req, res) => {
+app.patch("/comments/:id/downvotes", async (req, res) => {
   const id = req.params["id"];
+  const undo = Boolean((req.query.undo || ""));
+  const offset = (undo ? -1 : 1);
   let comment = await commentServices.findCommentById(id);
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {
-    await commentServices.downvoteComment(id);
-    res.status(201).send(comment);
+    const newComment = await commentServices.downvoteComment(id, offset);
+    res.status(201).send(newComment);
   }
 });
 

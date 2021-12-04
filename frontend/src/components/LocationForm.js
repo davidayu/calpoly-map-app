@@ -11,10 +11,6 @@ function LocationForm() {
   const [indoor, setIndoor] = useState(false);
   const [type, setType] = useState(Object.keys(pinTypesMap)[0]);
 
-  function goHome(){
-    ReactDOM.render(<Home />, document.getElementById("root"));
-  }
-
   function handleMapClick(pos) {
     setPosition(pos);
   }
@@ -43,7 +39,6 @@ function LocationForm() {
         .post(`${process.env.REACT_APP_API_HOST}/pins`, newPin)
         .then((response) => {
           if (response && response.status === 201) {
-            console.log(response.data);
             setPosition(null);
             setTitle("");
             setDescription("");

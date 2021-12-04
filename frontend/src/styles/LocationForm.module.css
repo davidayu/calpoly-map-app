@@ -46,7 +46,6 @@
 
 
 .formRowLarge textarea {
-   resize: none;
    height: 5rem;
    min-height: 2rem;
 }

@@ -14,7 +14,7 @@ function ListView(props) {
 
   async function getAllPins(){
     try {
-       const response = await axios.get('http://localhost:5000/pins');
+       const response = await axios.get(`${process.env.REACT_APP_API_HOST}/pins`);
        return response;
     }
     catch (error) {
@@ -26,13 +26,13 @@ function ListView(props) {
   async function upvotePin(id){
     try {
        let i = -1;
-       const response = await axios.put('http://localhost:5000/pins/upvote/' + id, id);
+       const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`);
        console.log(response);
        let pin = listItems.find((item) => item._id === id);
        console.log(pin);
        let newList = listItems;
        listItems.forEach((item, index) => {
-        if (item._id == id){
+        if (item._id === id){
           i = index;
         }
        });
@@ -51,11 +51,11 @@ function ListView(props) {
   async function downvotePin(id){
     try {
        let i = -1;
-       const response = await axios.put('http://localhost:5000/pins/downvote/' + id, id);
+       const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`);
        let pin = listItems.find((item) => item._id === id);
        let newList = listItems;
        listItems.forEach((item, index) => {
-        if (item._id == id){
+        if (item._id === id){
           i = index;
         }
        });

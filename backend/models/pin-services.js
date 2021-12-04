@@ -101,14 +101,14 @@ async function removePin(id) {
   return await pinModel.findByIdAndDelete({ _id: id });
 }
 
-async function upvotePin(id) {
+async function upvotePin(id, offset) {
   let result;
   try {
     const pinModel = getConnection().model("Pin", pinSchema);
     result = await pinModel.findById(id);
-    result.upvotes += 1;
-    await result.save();
-    return result;
+    result.upvotes += offset;
+    const newPin = await result.save();
+    return newPin;
   } catch (error) {
     console.log(error);
     return undefined;
@@ -116,14 +116,14 @@ async function upvotePin(id) {
   return result;
 }
 
-async function downvotePin(id) {
+async function downvotePin(id, offset) {
   let result;
   try {
     const pinModel = getConnection().model("Pin", pinSchema);
     result = await pinModel.findById(id);
-    result.downvotes += 1;
-    await result.save();
-    return result;
+    result.downvotes += offset;
+    const newPin = await result.save();
+    return newPin;
   } catch (error) {
     console.log(error);
     return undefined;
