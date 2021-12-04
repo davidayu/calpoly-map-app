@@ -1,0 +1,62 @@
+.locationForm {
+   position: relative;
+}
+
+.formCard {
+   position: fixed;
+   overflow-y: auto;
+   overflow-x: auto;
+   top: 1px;
+   left: 1px;
+   bottom: 1px;
+   width: 33%;
+   z-index: 750;
+   background: var(--content-color);
+   border: 1.5px solid var(--border-color);
+   border-radius: 10px;
+   padding: 2.5rem;
+   height: auto;
+}
+
+.header {
+   text-align: center;
+}
+
+.field{
+   outline: 1.5px solid var(--border-color-light);
+   border-radius: 10px;
+   display: block;
+
+}
+
+.field[id="indoor"], .field[id="type"] {
+   margin-right: 0;
+   margin-left: auto;
+}
+
+.formRowLarge {
+   margin: 1.5rem;
+}
+
+.formRowSmall {
+   margin: 1.5rem;
+   display: flex;
+   align-items: center;
+}
+
+
+.formRowLarge textarea {
+   resize: none;
+   height: 5rem;
+   min-height: 2rem;
+}
+
+.formRowLarge input, .formRowLarge textarea {
+   margin-top: 0.375rem;
+   width: 100%;
+}
+
+.submitButton {
+   margin-left: auto;
+   margin-right: auto;
+}
