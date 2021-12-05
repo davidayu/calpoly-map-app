@@ -1,0 +1,125 @@
+.commentView {
+  padding: 2.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerTopRow {
+  display: flex;
+  align-items: center;
+}
+
+.headerBottomRow {
+  display: flex;
+  align-items: center;
+}
+
+.closeIcon {
+  color: var(--content-color);
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.closeIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0;
+  margin-left: auto;
+  background: var(--icon-color);
+  border-radius: 50%;
+}
+
+.closeIconWrapper:hover {
+  background: var(--icon-color-hover);
+}
+
+.header {
+  margin-bottom: 1.25rem;
+}
+
+.header p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.625rem;
+  height: 1.625rem;
+  background: var(--icon-color);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.icon {
+  color: var(--content-color);
+  width: 1rem;
+  height: 1rem;
+}
+
+.iconWrapper:hover {
+  cursor: pointer;
+}
+
+.iconSelected {
+  background: var(--icon-color-hover);
+}
+
+.commentBottomRow {
+  display: flex;
+  align-items: center;
+}
+
+.comment p {
+  margin-bottom: 0.75rem;
+}
+
+.comment {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.commentField {
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  outline: 1.5px solid var(--border-color-light);
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.commentField:focus,
+.commentField:focus-visible {
+  box-shadow: 0px 1px 5px 0px var(--box-shadow-color);
+}
+
+.commentForm {
+  padding-top: 0.825rem;
+}
+
+.submitButton {
+  margin-top: 1rem;
+  color: var(--content-color);
+  background: var(--icon-color);
+  padding: 0.75rem;
+  border-radius: 5px;
+}
+
+.submitButton:hover {
+  cursor: pointer;
+  background: var(--icon-color-hover);
+}
+
+.comment + .comment {
+  border-top: 1px solid var(--border-color-light);
+}

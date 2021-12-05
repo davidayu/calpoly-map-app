@@ -4,6 +4,7 @@ import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
 import { ReactComponent as Close } from "../icons/close.svg";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import style from "../styles/CommentView.module.css";
 
 function CommentView() {
   const params = useParams();
@@ -155,36 +156,66 @@ function CommentView() {
 
   function Header(props) {
     return !props.location ? null : (
-      <div>
-        <h2>{props.location.title}</h2>
-        <Link to={"/"}>
-          <Close />
-        </Link>
+      <div className={style.header}>
+        <div className={style.headerTopRow}>
+          <h2>{props.location.title}</h2>
+          <Link className={style.closeIconWrapper} to={"/"}>
+            <Close className={style.closeIcon} />
+          </Link>
+        </div>
         <p>{props.location.description}</p>
-        <button onClick={props.handleUpvote}>
-          <ThumbsUp />
-        </button>
-        <span>{props.location.upvotes}</span>
-        <button onClick={props.handleDownvote}>
-          <ThumbsDown />
-        </button>
-        <span>{props.location.downvotes}</span>
+        <div className={style.headerBottomRow}>
+          <button
+            className={
+              style.iconWrapper +
+              (props.location.upvoted ? " " + style.iconSelected : "")
+            }
+            onClick={props.handleUpvote}
+          >
+            <ThumbsUp className={style.icon} />
+          </button>
+          <span>{props.location.upvotes}</span>
+          <button
+            className={
+              style.iconWrapper +
+              (props.location.downvoted ? " " + style.iconSelected : "")
+            }
+            onClick={props.handleDownvote}
+          >
+            <ThumbsDown className={style.icon} />
+          </button>
+          <span>{props.location.downvotes}</span>
+        </div>
       </div>
     );
   }
 
   function Comment(props) {
     return (
-      <div>
+      <div className={style.comment}>
         <p>{props.comment.description}</p>
-        <button onClick={props.handleUpvote}>
-          <ThumbsUp />
-        </button>
-        <span>{props.comment.upvotes}</span>
-        <button onClick={props.handleDownvote}>
-          <ThumbsDown />
-        </button>
-        <span>{props.comment.downvotes}</span>
+        <div className={style.commentBottomRow}>
+          <button
+            className={
+              style.iconWrapper +
+              (props.comment.upvoted ? " " + style.iconSelected : "")
+            }
+            onClick={props.handleUpvote}
+          >
+            <ThumbsUp className={style.icon} />
+          </button>
+          <span>{props.comment.upvotes}</span>
+          <button
+            className={
+              style.iconWrapper +
+              (props.comment.downvoted ? " " + style.iconSelected : "")
+            }
+            onClick={props.handleDownvote}
+          >
+            <ThumbsDown className={style.icon} />
+          </button>
+          <span>{props.comment.downvotes}</span>
+        </div>
       </div>
     );
   }
@@ -217,7 +248,7 @@ function CommentView() {
   }
 
   return (
-    <div>
+    <div class={style.commentView}>
       <Header
         location={location}
         handleUpvote={() => handleLocationUpvote()}
@@ -236,9 +267,10 @@ function CommentView() {
           );
         })}
       </div>
-      <form id="usrSubmit">
+      <form className={style.commentForm}>
         <label htmlFor="comment">Leave a comment</label>
         <textarea
+          className={style.commentField}
           id="comment"
           name="comment"
           value={newComment}
@@ -248,7 +280,12 @@ function CommentView() {
           autocapitalize="off"
           spellcheck="false"
         />
-        <input type="button" onClick={() => handleSubmit()} value="Submit" />
+        <input
+          className={style.submitButton}
+          type="button"
+          onClick={() => handleSubmit()}
+          value="Submit"
+        />
       </form>
     </div>
   );
