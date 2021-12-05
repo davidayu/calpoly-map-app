@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Home";
-import ReactDOM from "react-dom";
 import axios from "axios";
-
+import { ReactComponent as Close } from "../icons/close.svg";
 import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
 import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
+import { useNavigate } from "react-router-dom";
 
-function goHome(){
-  ReactDOM.render(<Home />, document.getElementById("root"));
-}
+function ListView() {
 
-function ListView(props) {
+   const navigate = useNavigate();
 
   const [locations, setLocations] = useState([]);
 
@@ -98,12 +95,8 @@ function ListView(props) {
   return (
     <div>
       <h1>List view</h1>
-      <button
-        onClick={goHome}
-        style={{ position: "absolute", right: 0, top: 0 }}
-      >
-        {" "}
-        X{" "}
+      <button onClick={() => navigate(-1)} >
+         <Close />
       </button>
       <p>
         {locations.map((pin, index) => (

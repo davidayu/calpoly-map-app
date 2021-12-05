@@ -7,8 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function CommentView() {
 
-   const navigate = useNavigate();
    const params = useParams();
+   const navigate = useNavigate();
 
    const [location, setLocation] = useState(null);
    const [comments, setComments] = useState([]);

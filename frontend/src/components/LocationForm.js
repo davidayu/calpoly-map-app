@@ -3,6 +3,7 @@ import Map from "./Map";
 import axios from "axios";
 import { pinTypesMap } from "../pinTypes.js";
 import style from "../styles/LocationForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function LocationForm() {
   const [position, setPosition] = useState(null);
@@ -10,6 +11,8 @@ function LocationForm() {
   const [description, setDescription] = useState("");
   const [indoor, setIndoor] = useState(false);
   const [type, setType] = useState(Object.keys(pinTypesMap)[0]);
+
+  const navigate = useNavigate();
 
   function handleMapClick(pos) {
     setPosition(pos);
@@ -39,11 +42,13 @@ function LocationForm() {
         .post(`${process.env.REACT_APP_API_HOST}/pins`, newPin)
         .then((response) => {
           if (response && response.status === 201) {
+            const id = response.data._id;
             setPosition(null);
             setTitle("");
             setDescription("");
             setIndoor(false);
-            setType("Study");
+            setType(Object.keys(pinTypesMap)[0]);
+            navigate(`../../?new=${id}`);
           }
         })
         .catch((error) => console.log(error));
@@ -57,7 +62,7 @@ function LocationForm() {
         handleMapClick={handleMapClick}
         height="100vh"
         width="100vw"
-        center={[35.3, -120.66]}
+        center={[35.304094, -120.668936]}
       />
       <div className={style.formCard}>
          <h2 className={style.header}>Submit a new location</h2>
@@ -65,7 +70,7 @@ function LocationForm() {
             <div className={style.formRowLarge} >
                <label htmlFor="title"> Location name </label>
                <input
-                  className={style.field}
+                  className={style.field + " " + style.outlined}
                   type="text"
                   id="title"
                   name="title"
@@ -76,7 +81,7 @@ function LocationForm() {
             <div className={style.formRowLarge} >
                <label htmlFor="description"> Location description </label>
                <textarea
-                  className={style.field}
+                  className={style.field + " " + style.outlined}
                   id="description"
                   name="description"
                   value={description}
@@ -97,7 +102,7 @@ function LocationForm() {
             <div className={style.formRowSmall} >
                <label htmlFor="type">Location type </label>
                <select
-                  className={style.field} 
+                  className={style.field + " " + style.outlined} 
                   id="type" 
                   name="type" 
                   value={type} 

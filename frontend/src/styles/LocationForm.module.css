@@ -15,7 +15,6 @@
    border: 1.5px solid var(--border-color);
    border-radius: 10px;
    padding: 2.5rem;
-   height: auto;
 }
 
 .header {
@@ -23,15 +22,22 @@
 }
 
 .field{
-   outline: 1.5px solid var(--border-color-light);
-   border-radius: 10px;
    display: block;
-
 }
 
 .field[id="indoor"], .field[id="type"] {
    margin-right: 0;
    margin-left: auto;
+}
+
+.outlined {
+   outline: 1.5px solid var(--border-color-light);
+   border-radius: 5px;
+}
+
+.outlined:focus,
+.outlined:focus-visible {
+  box-shadow: 0px 1px 5px 0px var(--box-shadow-color);
 }
 
 .formRowLarge {
@@ -44,18 +50,32 @@
    align-items: center;
 }
 
-
 .formRowLarge textarea {
-   height: 5rem;
+   height: 10rem;
    min-height: 2rem;
 }
 
 .formRowLarge input, .formRowLarge textarea {
    margin-top: 0.375rem;
    width: 100%;
+   padding: 0.5rem;
+}
+
+.field[id="type"] {
+   padding: 0.25rem;
 }
 
 .submitButton {
+   margin-top: 1.5rem;
    margin-left: auto;
    margin-right: auto;
+   color: var(--content-color);
+   background: var(--icon-color);
+   padding: 0.75rem;
+   border-radius: 5px;
+}
+
+.submitButton:hover {
+   cursor: pointer;
+   background: var(--icon-color-hover);
 }
