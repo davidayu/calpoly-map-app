@@ -12,52 +12,6 @@ function goHome(){
 
 function ListView(props) {
 
-//   async function upvotePin(id){
-//     try {
-//        let i = -1;
-//        const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`);
-//        console.log(response);
-//        let pin = listItems.find((item) => item._id === id);
-//        console.log(pin);
-//        let newList = listItems;
-//        listItems.forEach((item, index) => {
-//         if (item._id === id){
-//           i = index;
-//         }
-//        });
-//        newList[i] = response.data;
-//        console.log(i);
-//        console.log([...listItems].indexOf(pin));
-//        setList([...newList]);
-//        return response;
-//     }
-//     catch (error) {
-//        console.log(error);
-//        return false;
-//     }
-//   }
-
-//   async function downvotePin(id){
-//     try {
-//        let i = -1;
-//        const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`);
-//        let pin = listItems.find((item) => item._id === id);
-//        let newList = listItems;
-//        listItems.forEach((item, index) => {
-//         if (item._id === id){
-//           i = index;
-//         }
-//        });
-//        newList[i] = response.data;
-//        setList([...newList]);
-//        return response;
-//     }
-//     catch (error) {
-//        console.log(error);
-//        return false;
-//     }
-//   }
-
   const [locations, setLocations] = useState([]);
 
     useEffect(() => {
