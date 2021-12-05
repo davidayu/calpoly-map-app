@@ -89,28 +89,28 @@ async function removeComment(id) {
   }
 }
 
-async function upvoteComment(id) {
+async function upvoteComment(id, offset) {
   let result;
   try {
     const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
-    result.upvotes += 1;
-    await result.save();
-    return result;
+    result.upvotes += offset;
+    const newComment = await result.save();
+    return newComment;
   } catch (error) {
     console.log(error);
     return undefined;
   }
 }
 
-async function downvoteComment(id) {
+async function downvoteComment(id, offset) {
   let result;
   try {
     const commentModel = getConnection().model("Comment", commentSchema);
     result = await commentModel.findById(id);
-    result.downvotes += 1;
-    await result.save();
-    return result;
+    result.downvotes += offset;
+    const newComment = await result.save();
+    return newComment;
   } catch (error) {
     console.log(error);
     return undefined;

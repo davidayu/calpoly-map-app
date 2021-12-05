@@ -1,5 +1,7 @@
 .legend {
-  position: absolute;
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: auto;
   top: 25%;
   right: 1px;
   z-index: 750;

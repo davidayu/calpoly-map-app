@@ -1,106 +1,178 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Home";
-import ReactDOM from "react-dom";
 import axios from "axios";
-
+import { ReactComponent as Close } from "../icons/close.svg";
 import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
 import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
+import { ReactComponent as StudyIcon } from "../icons/study.svg";
+import { ReactComponent as ArtIcon } from "../icons/brush.svg";
+import { ReactComponent as DiningIcon } from "../icons/eating.svg";
+import { ReactComponent as GenericIcon } from "../icons/marker.svg";
+import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
+import { pinTypesMap } from "../pinTypes.js";
+import { Link, useNavigate } from "react-router-dom";
+import style from "../styles/ListView.module.css";
 
-function goHome(){
-  ReactDOM.render(<Home />, document.getElementById("root"));
-}
+function ListView() {
+  const navigate = useNavigate();
 
-function ListView(props) {
+  const [locations, setLocations] = useState([]);
 
-  async function getAllPins(){
+  useEffect(() => {
+    getAllPins().then((result) => {
+      if (result) setLocations(result.data.pins_list);
+    });
+  }, []);
+
+  async function getAllPins() {
     try {
-       const response = await axios.get('http://localhost:5000/pins');
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}/pins`
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   }
 
-  async function upvotePin(id){
-    try {
-       let i = -1;
-       const response = await axios.put('http://localhost:5000/pins/upvote/' + id, id);
-       console.log(response);
-       let pin = listItems.find((item) => item._id === id);
-       console.log(pin);
-       let newList = listItems;
-       listItems.forEach((item, index) => {
-        if (item._id == id){
-          i = index;
-        }
-       });
-       newList[i] = response.data;
-       console.log(i);
-       console.log([...listItems].indexOf(pin));
-       setList([...newList]);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
-  }
-
-  async function downvotePin(id){
-    try {
-       let i = -1;
-       const response = await axios.put('http://localhost:5000/pins/downvote/' + id, id);
-       let pin = listItems.find((item) => item._id === id);
-       let newList = listItems;
-       listItems.forEach((item, index) => {
-        if (item._id == id){
-          i = index;
-        }
-       });
-       newList[i] = response.data;
-       setList([...newList]);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
+  function TypeIcon(props) {
+    switch (props.type) {
+      case "STUDY":
+        return (
+          <StudyIcon
+            className={style.cardSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
+      case "ART":
+        return (
+          <ArtIcon
+            className={style.cardSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
+      case "DINING":
+        return (
+          <DiningIcon
+            className={style.cardSubicon}
+            title={pinTypesMap[props.type]["text"]}
+          />
+        );
+      default:
+        return <GenericIcon className={style.cardSubicon} />;
     }
   }
 
-  const [listItems, setList] = useState([]);
+  function upvoteLocation(index) {
+    const id = locations[index]["_id"];
+    if (locations[index]["upvoted"]) {
+      axios
+        .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes?undo=true`)
+        .then((response) => {
+          if (response && response.status === 201) {
+            const tempLocations = locations.map((l) => Object.assign({}, l));
+            tempLocations[index] = response.data;
+            tempLocations[index]["upvoted"] = false;
+            setLocations(tempLocations);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else if (!locations[index]["upvoted"] && !locations[index]["downvoted"]) {
+      axios
+        .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`)
+        .then((response) => {
+          if (response && response.status === 201) {
+            const tempLocations = locations.map((l) => Object.assign({}, l));
+            tempLocations[index] = response.data;
+            tempLocations[index]["upvoted"] = true;
+            setLocations(tempLocations);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+  }
 
-    useEffect(() => {
-      getAllPins().then( result => {
-        if (result)
-            setList(result.data.pins_list);
-            console.log(result.data);
-      });
-  }, [] );
+  function downvoteLocation(index) {
+    const id = locations[index]["_id"];
+    if (locations[index]["downvoted"]) {
+      axios
+        .patch(
+          `${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes?undo=true`
+        )
+        .then((response) => {
+          if (response && response.status === 201) {
+            const tempLocations = locations.map((l) => Object.assign({}, l));
+            tempLocations[index] = response.data;
+            tempLocations[index]["downvoted"] = false;
+            setLocations(tempLocations);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else if (!locations[index]["upvoted"] && !locations[index]["downvoted"]) {
+      axios
+        .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`)
+        .then((response) => {
+          if (response && response.status === 201) {
+            const tempLocations = locations.map((l) => Object.assign({}, l));
+            tempLocations[index] = response.data;
+            tempLocations[index]["downvoted"] = true;
+            setLocations(tempLocations);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
+  }
 
   return (
-    <div>
-      <h1>List view</h1>
-      <button
-        onClick={goHome}
-        style={{ position: "absolute", right: 0, top: 0 }}
-      >
-        {" "}
-        X{" "}
-      </button>
-      <p>
-        {listItems.map((pin) => (
-          <p style={{ outlineStyle: "groove", outlineColor: pin.color }}>
-            <p style={{ fontSize: 20 }}> {pin.title}</p>
-            <div>{pin.description}</div>
-            <div style={{ float: "right", margin: 1 }}>
-              <ThumbsUp onClick={() => upvotePin(pin._id)}/> {pin.upvotes} <ThumbsDown onClick={() => downvotePin(pin._id)}/> {pin.downvotes}{" "}
+    <div className={style.listView}>
+      <div className={style.header}>
+        <h2>Locations</h2>
+        {/* <button className={style.iconWrapper} onClick={() => navigate(-1)}>
+          <Close className={style.icon} />
+        </button> */}
+      </div>
+      <div>
+        <div className={style.locations}>
+          {locations.map((pin, index) => (
+            <div key={pin._id} className={style.locationCard}>
+              <div className={style.cardTopRow}>
+                <h4> {pin.title}</h4>
+                <TypeIcon type={pin.pinType} />
+              </div>
+              <p>{pin.description}</p>
+              <div className={style.cardBottomRow}>
+                <button
+                  className={
+                    style.cardIconWrapper +
+                    (pin.upvoted ? " " + style.iconSelected : "")
+                  }
+                  onClick={() => upvoteLocation(index)}
+                >
+                  <ThumbsUp className={style.cardIcon} />
+                </button>
+                <span>{pin.upvotes}</span>
+                <button
+                  className={
+                    style.cardIconWrapper +
+                    (pin.downvoted ? " " + style.iconSelected : "")
+                  }
+                  onClick={() => downvoteLocation(index)}
+                >
+                  <ThumbsDown className={style.cardIcon} />
+                </button>
+                <span>{pin.downvotes}</span>
+
+                <Link
+                  className={style.cardIconWrapper + " " + style.maximizeIcon}
+                  to={`${pin._id}`}
+                >
+                  <MaximizeIcon className={style.cardIcon} />
+                </Link>
+              </div>
             </div>
-            <p style={{ color: pin.color }}>Type: {pin.pinType}</p>
-          </p>
-        ))}
-      </p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

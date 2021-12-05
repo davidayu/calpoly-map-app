@@ -13,7 +13,7 @@ import style from "../styles/Pin.module.css";
 
 function Pin(props) {
   useMapEvents(
-    props.handleMapClick === undefined
+    !props.handleMapClick
       ? {}
       : {
           click: (event) => props.handleMapClick(event.latlng),
@@ -48,12 +48,12 @@ function Pin(props) {
     }
   }
 
-  return props.position === null ? null : (
+  return !props.position ? null : (
     <Marker
       position={props.position}
       icon={
         new Icon({
-          iconUrl: pinTypesMap[props.type]["iconUrl"],
+          iconUrl: props.iconUrl,
           shadowUrl:
             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
           iconSize: [25, 41],
@@ -61,7 +61,7 @@ function Pin(props) {
         })
       }
     >
-      {props.id === undefined ? null : (
+      {!props.id ? null : (
         <Popup>
           <div className={style.popup}>
             <div className={style.popupTopBar}>
@@ -79,7 +79,7 @@ function Pin(props) {
               <span>{props.downvotes}</span>
               <Link
                 className={style.expandIconWrapper}
-                to="locations/INSERT_ID_HERE"
+                to={`locations/${props.id}`}
               >
                 <MaximizeIcon className={style.expandIcon} />
               </Link>

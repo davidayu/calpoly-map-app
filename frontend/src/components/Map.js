@@ -1,10 +1,9 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import Pin from "./Pin";
+import { pinTypesMap } from "../pinTypes.js";
 
 function Map(props) {
-  const defaultPosition = [35.3, -120.66];
-
-  function displayPins() {
+  function enumeratePins() {
     if (props.pins)
       return props.pins.map((pin) => (
         <Pin
@@ -16,6 +15,7 @@ function Map(props) {
           type={pin.pinType}
           upvotes={pin.upvotes}
           downvotes={pin.downvotes}
+          iconUrl={pinTypesMap[pin.pinType]["iconUrl"]}
         />
       ));
     else if (props.handleMapClick)
@@ -23,6 +23,9 @@ function Map(props) {
         <Pin
           position={props.newPinPosition}
           handleMapClick={props.handleMapClick}
+          iconUrl={
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png"
+          }
         />
       );
   }
@@ -30,16 +33,17 @@ function Map(props) {
   return (
     <div className="map__container">
       <MapContainer
-        center={defaultPosition}
-        zoom={14}
+        center={props.center}
+        zoom={15}
         zoomControl={false}
-        minZoom={7}
+        minZoom={4}
         maxZoom={18}
         style={{
           height: props.height,
+          width: props.width,
         }}
       >
-        {displayPins()}
+        {enumeratePins()}
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"

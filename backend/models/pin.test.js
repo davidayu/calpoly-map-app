@@ -285,7 +285,7 @@ test("Upvote pin", async () => {
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
-  const upvotedPin = await pinServices.upvotePin(addedPin.id);
+  const upvotedPin = await pinServices.upvotePin(addedPin.id, 1);
   expect(upvotedPin).toBeDefined();
   expect(upvotedPin.id).toBe(addedPin.id);
   expect(upvotedPin.title).toBe(addedPin.title);
@@ -309,7 +309,7 @@ test("Downvote pin", async () => {
   };
   const result = new pinModel(dummyPin);
   const addedPin = await result.save();
-  const upvotedPin = await pinServices.downvotePin(addedPin.id);
+  const upvotedPin = await pinServices.downvotePin(addedPin.id, 1);
   expect(upvotedPin).toBeDefined();
   expect(upvotedPin.id).toBe(addedPin.id);
   expect(upvotedPin.title).toBe(addedPin.title);

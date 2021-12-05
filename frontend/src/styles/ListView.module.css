@@ -1,0 +1,121 @@
+.listView {
+  padding: 2.5rem;
+}
+
+.icon {
+  color: var(--content-color);
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0;
+  margin-left: auto;
+  background: var(--icon-color);
+  border-radius: 50%;
+}
+
+.iconWrapper:hover {
+  cursor: pointer;
+  background: var(--icon-color-hover);
+}
+
+.header {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.header h4 {
+  padding-left: 10%;
+}
+
+.locations {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.locationCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: 15rem;
+  border: 1.5px solid var(--border-color-light);
+  border-radius: 5px;
+}
+
+.locationCard:hover {
+  background: var(--content-color-hover);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.locationCard p {
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardBottomRow {
+  margin-top: auto;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.cardIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.625rem;
+  height: 1.625rem;
+  background: var(--icon-color);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.cardIcon {
+  color: var(--content-color);
+  width: 1rem;
+  height: 1rem;
+}
+
+.cardIconWrapper:hover {
+  cursor: pointer;
+}
+
+.iconSelected {
+  background: var(--icon-color-hover);
+}
+
+.cardTopRow {
+  display: flex;
+}
+
+.cardSubicon {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.maximizeIcon {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.maximizeIcon:hover {
+  background: var(--icon-color-hover);
+}

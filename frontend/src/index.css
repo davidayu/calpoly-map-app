@@ -30,3 +30,7 @@ a {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+
+textarea {
+  resize: none;
+}
