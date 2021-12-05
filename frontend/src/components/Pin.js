@@ -11,7 +11,6 @@ import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
 import { pinTypesMap } from "../pinTypes.js";
 import style from "../styles/Pin.module.css";
 
-
 function Pin(props) {
   useMapEvents(
     !props.handleMapClick

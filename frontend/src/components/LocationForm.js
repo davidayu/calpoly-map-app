@@ -65,58 +65,67 @@ function LocationForm() {
         center={[35.304094, -120.668936]}
       />
       <div className={style.formCard}>
-         <h2 className={style.header}>Submit a new location</h2>
-         <form>
-            <div className={style.formRowLarge} >
-               <label htmlFor="title"> Location name </label>
-               <input
-                  className={style.field + " " + style.outlined}
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={title}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className={style.formRowLarge} >
-               <label htmlFor="description"> Location description </label>
-               <textarea
-                  className={style.field + " " + style.outlined}
-                  id="description"
-                  name="description"
-                  value={description}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className={style.formRowSmall} >
-               <label htmlFor="indoor"> Indoor location </label>
-               <input
-                  className={style.field}
-                  type="checkbox"
-                  id="indoor"
-                  name="indoor"
-                  checked={indoor}
-                  onChange={handleChange}
-               />
-            </div>
-            <div className={style.formRowSmall} >
-               <label htmlFor="type">Location type </label>
-               <select
-                  className={style.field + " " + style.outlined} 
-                  id="type" 
-                  name="type" 
-                  value={type} 
-                  onChange={handleChange}
-               >
-                  {Object.keys(pinTypesMap).map(
-                     (pinType) => { return (<option value={pinType}>{pinTypesMap[pinType]["text"]} </option>); }
-                  )}
-               </select>
-            </div>
-            <div className={style.formRowSmall} >
-               <input className={style.submitButton} type="button" value="Submit location" onClick={handleSubmission} />
-            </div>
-         </form>
+        <h2 className={style.header}>Submit a new location</h2>
+        <form>
+          <div className={style.formRowLarge}>
+            <label htmlFor="title"> Location name </label>
+            <input
+              className={style.field + " " + style.outlined}
+              type="text"
+              id="title"
+              name="title"
+              value={title}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={style.formRowLarge}>
+            <label htmlFor="description"> Location description </label>
+            <textarea
+              className={style.field + " " + style.outlined}
+              id="description"
+              name="description"
+              value={description}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={style.formRowSmall}>
+            <label htmlFor="indoor"> Indoor location </label>
+            <input
+              className={style.field}
+              type="checkbox"
+              id="indoor"
+              name="indoor"
+              checked={indoor}
+              onChange={handleChange}
+            />
+          </div>
+          <div className={style.formRowSmall}>
+            <label htmlFor="type">Location type </label>
+            <select
+              className={style.field + " " + style.outlined}
+              id="type"
+              name="type"
+              value={type}
+              onChange={handleChange}
+            >
+              {Object.keys(pinTypesMap).map((pinType) => {
+                return (
+                  <option value={pinType}>
+                    {pinTypesMap[pinType]["text"]}{" "}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className={style.formRowSmall}>
+            <input
+              className={style.submitButton}
+              type="button"
+              value="Submit location"
+              onClick={handleSubmission}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );

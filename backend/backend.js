@@ -74,8 +74,8 @@ app.delete("/pins/:id", async (req, res) => {
 
 app.patch("/pins/:id/upvotes", async (req, res) => {
   const id = req.params["id"];
-  const undo = Boolean((req.query.undo || ""));
-  const offset = (undo ? -1 : 1);
+  const undo = Boolean(req.query.undo || "");
+  const offset = undo ? -1 : 1;
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
@@ -87,8 +87,8 @@ app.patch("/pins/:id/upvotes", async (req, res) => {
 
 app.patch("/pins/:id/downvotes", async (req, res) => {
   const id = req.params["id"];
-  const undo = Boolean((req.query.undo || ""));
-  const offset = (undo ? -1 : 1);
+  const undo = Boolean(req.query.undo || "");
+  const offset = undo ? -1 : 1;
   let pin = await pinServices.findPinById(id);
   if (pin === undefined) res.status(404).send("Pin not found.");
   else {
@@ -191,20 +191,20 @@ app.get("/comments", async (req, res) => {
 
 app.patch("/comments/:id/upvotes", async (req, res) => {
   const id = req.params["id"];
-  const undo = Boolean((req.query.undo || ""));
-  const offset = (undo ? -1 : 1);
+  const undo = Boolean(req.query.undo || "");
+  const offset = undo ? -1 : 1;
   let comment = await commentServices.findCommentById(id);
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {
-    const newComment =await commentServices.upvoteComment(id, offset);
+    const newComment = await commentServices.upvoteComment(id, offset);
     res.status(201).send(newComment);
   }
 });
 
 app.patch("/comments/:id/downvotes", async (req, res) => {
   const id = req.params["id"];
-  const undo = Boolean((req.query.undo || ""));
-  const offset = (undo ? -1 : 1);
+  const undo = Boolean(req.query.undo || "");
+  const offset = undo ? -1 : 1;
   let comment = await commentServices.findCommentById(id);
   if (comment === undefined) res.status(404).send("Comment not found.");
   else {

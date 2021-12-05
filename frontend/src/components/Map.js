@@ -3,7 +3,6 @@ import Pin from "./Pin";
 import { pinTypesMap } from "../pinTypes.js";
 
 function Map(props) {
-
   function enumeratePins() {
     if (props.pins)
       return props.pins.map((pin) => (
@@ -24,7 +23,9 @@ function Map(props) {
         <Pin
           position={props.newPinPosition}
           handleMapClick={props.handleMapClick}
-          iconUrl={"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png"}
+          iconUrl={
+            "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png"
+          }
         />
       );
   }
