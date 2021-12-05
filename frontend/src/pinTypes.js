@@ -2,7 +2,7 @@ export const pinTypesMap = {
   STUDY: {
     text: "Study",
     iconUrl:
-      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png",
   },
   ART: {
     text: "Art",
@@ -17,6 +17,6 @@ export const pinTypesMap = {
   NONE: {
     text: "None",
     iconUrl:
-      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png",
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
   },
 };
