@@ -1,5 +1,5 @@
 .search {
-  position: absolute;
+  position: fixed;
   top: 1px;
   left: 1px;
   /* z-index of Leaflet popup is 700 */

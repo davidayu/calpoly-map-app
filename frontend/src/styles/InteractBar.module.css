@@ -1,5 +1,5 @@
 .interactBar {
-  position: absolute;
+  position: fixed;
   left: 1px;
   bottom: 1px;
   z-index: 750;

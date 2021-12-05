@@ -12,72 +12,134 @@ function goHome(){
 
 function ListView(props) {
 
-  async function getAllPins(){
-    try {
-       const response = await axios.get(`${process.env.REACT_APP_API_HOST}/pins`);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
-  }
+//   async function upvotePin(id){
+//     try {
+//        let i = -1;
+//        const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`);
+//        console.log(response);
+//        let pin = listItems.find((item) => item._id === id);
+//        console.log(pin);
+//        let newList = listItems;
+//        listItems.forEach((item, index) => {
+//         if (item._id === id){
+//           i = index;
+//         }
+//        });
+//        newList[i] = response.data;
+//        console.log(i);
+//        console.log([...listItems].indexOf(pin));
+//        setList([...newList]);
+//        return response;
+//     }
+//     catch (error) {
+//        console.log(error);
+//        return false;
+//     }
+//   }
 
-  async function upvotePin(id){
-    try {
-       let i = -1;
-       const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`);
-       console.log(response);
-       let pin = listItems.find((item) => item._id === id);
-       console.log(pin);
-       let newList = listItems;
-       listItems.forEach((item, index) => {
-        if (item._id === id){
-          i = index;
-        }
-       });
-       newList[i] = response.data;
-       console.log(i);
-       console.log([...listItems].indexOf(pin));
-       setList([...newList]);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
-  }
+//   async function downvotePin(id){
+//     try {
+//        let i = -1;
+//        const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`);
+//        let pin = listItems.find((item) => item._id === id);
+//        let newList = listItems;
+//        listItems.forEach((item, index) => {
+//         if (item._id === id){
+//           i = index;
+//         }
+//        });
+//        newList[i] = response.data;
+//        setList([...newList]);
+//        return response;
+//     }
+//     catch (error) {
+//        console.log(error);
+//        return false;
+//     }
+//   }
 
-  async function downvotePin(id){
-    try {
-       let i = -1;
-       const response = await axios.patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`);
-       let pin = listItems.find((item) => item._id === id);
-       let newList = listItems;
-       listItems.forEach((item, index) => {
-        if (item._id === id){
-          i = index;
-        }
-       });
-       newList[i] = response.data;
-       setList([...newList]);
-       return response;
-    }
-    catch (error) {
-       console.log(error);
-       return false;
-    }
-  }
-
-  const [listItems, setList] = useState([]);
+  const [locations, setLocations] = useState([]);
 
     useEffect(() => {
       getAllPins().then( result => {
-        if (result)
-            setList(result.data.pins_list);
+         if (result)
+            setLocations(result.data.pins_list);
             console.log(result.data);
-      });
-  }, [] );
+         });
+      }, []);
+
+   async function getAllPins(){
+      try {
+         const response = await axios.get(`${process.env.REACT_APP_API_HOST}/pins`);
+         return response;
+      }
+      catch (error) {
+         console.log(error);
+         return false;
+      }
+   }
+
+
+   function upvoteLocation(index) {
+      const id = locations[index]["_id"];
+      if (locations[index]["upvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocations = locations.map(l => Object.assign({}, l));
+                  tempLocations[index] = response.data;
+                  tempLocations[index]["upvoted"] = false;
+                  setLocations(tempLocations);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!locations[index]["upvoted"] && !locations[index]["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/upvotes`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocations = locations.map(l => Object.assign({}, l));
+                  tempLocations[index] = response.data;
+                  tempLocations[index]["upvoted"] = true;
+                  setLocations(tempLocations);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+    }
+
+    function downvoteLocation(index) {
+      const id = locations[index]["_id"];
+      if (locations[index]["downvoted"]) {
+         axios
+            .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes?undo=true`)
+            .then((response) => {
+               if (response && response.status === 201) {
+                  const tempLocations = locations.map(l => Object.assign({}, l));
+                  tempLocations[index] = response.data;
+                  tempLocations[index]["downvoted"] = false;
+                  setLocations(tempLocations);
+               }
+            })
+            .catch((error) => console.log(error));
+      }
+      else if (!locations[index]["upvoted"] && !locations[index]["downvoted"]) {
+
+         axios
+         .patch(`${process.env.REACT_APP_API_HOST}/pins/${id}/downvotes`)
+         .then((response) => {
+            if (response && response.status === 201) {
+               const tempLocations = locations.map(l => Object.assign({}, l));
+               tempLocations[index] = response.data;
+               tempLocations[index]["downvoted"] = true;
+               setLocations(tempLocations);
+            }
+         })
+         .catch((error) => console.log(error));
+      }
+    }
 
   return (
     <div>
@@ -90,12 +152,12 @@ function ListView(props) {
         X{" "}
       </button>
       <p>
-        {listItems.map((pin) => (
+        {locations.map((pin, index) => (
           <p style={{ outlineStyle: "groove", outlineColor: pin.color }}>
             <p style={{ fontSize: 20 }}> {pin.title}</p>
             <div>{pin.description}</div>
             <div style={{ float: "right", margin: 1 }}>
-              <ThumbsUp onClick={() => upvotePin(pin._id)}/> {pin.upvotes} <ThumbsDown onClick={() => downvotePin(pin._id)}/> {pin.downvotes}{" "}
+              <ThumbsUp onClick={() => upvoteLocation(index)}/> {pin.upvotes} <ThumbsDown onClick={() => downvoteLocation(index)}/> {pin.downvotes}{" "}
             </div>
             <p style={{ color: pin.color }}>Type: {pin.pinType}</p>
           </p>

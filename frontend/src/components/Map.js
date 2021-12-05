@@ -33,9 +33,9 @@ function Map(props) {
     <div className="map__container">
       <MapContainer
         center={props.center}
-        zoom={14}
+        zoom={15}
         zoomControl={false}
-        minZoom={7}
+        minZoom={4}
         maxZoom={18}
         style={{
           height: props.height,
