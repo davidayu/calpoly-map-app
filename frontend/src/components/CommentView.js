@@ -248,7 +248,7 @@ function CommentView() {
   }
 
   return (
-    <div class={style.commentView}>
+    <div className={style.commentView}>
       <Header
         location={location}
         handleUpvote={() => handleLocationUpvote()}
@@ -275,10 +275,10 @@ function CommentView() {
           name="comment"
           value={newComment}
           onChange={handleChange}
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
         <input
           className={style.submitButton}

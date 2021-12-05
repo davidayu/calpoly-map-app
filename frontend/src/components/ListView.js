@@ -20,7 +20,6 @@ function ListView() {
   useEffect(() => {
     getAllPins().then((result) => {
       if (result) setLocations(result.data.pins_list);
-      console.log(result.data);
     });
   }, []);
 
@@ -128,14 +127,14 @@ function ListView() {
     <div className={style.listView}>
       <div className={style.header}>
         <h2>Locations</h2>
-        <button className={style.iconWrapper} onClick={() => navigate(-1)}>
+        {/* <button className={style.iconWrapper} onClick={() => navigate(-1)}>
           <Close className={style.icon} />
-        </button>
+        </button> */}
       </div>
-      <div class={style.locationsWrapper}>
+      <div>
         <div className={style.locations}>
           {locations.map((pin, index) => (
-            <div className={style.locationCard}>
+            <div key={pin._id} className={style.locationCard}>
               <div className={style.cardTopRow}>
                 <h4> {pin.title}</h4>
                 <TypeIcon type={pin.pinType} />

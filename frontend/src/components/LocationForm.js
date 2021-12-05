@@ -110,7 +110,7 @@ function LocationForm() {
             >
               {Object.keys(pinTypesMap).map((pinType) => {
                 return (
-                  <option value={pinType}>
+                  <option key={pinType} value={pinType}>
                     {pinTypesMap[pinType]["text"]}{" "}
                   </option>
                 );
