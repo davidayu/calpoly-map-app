@@ -176,7 +176,7 @@ test("Upvote comment", async () => {
     downvotes: 54,
   };
   const addedComment = await commentServices.addComment(dummyComment);
-  result = await commentServices.upvoteComment(addedComment.id);
+  result = await commentServices.upvoteComment(addedComment.id, 1);
 
   expect(result.description).toBe(dummyComment.description);
   expect(result.upvotes).toBe(24);
@@ -192,7 +192,7 @@ test("Upvote comment - nonexistent id", async () => {
     downvotes: 54,
   };
   await commentServices.addComment(dummyComment);
-  const result = await commentServices.upvoteComment(someId);
+  const result = await commentServices.upvoteComment(someId, 1);
 
   expect(result).toBeUndefined();
 });
@@ -204,7 +204,7 @@ test("Downvote comment", async () => {
     downvotes: 54,
   };
   const addedComment = await commentServices.addComment(dummyComment);
-  result = await commentServices.downvoteComment(addedComment.id);
+  result = await commentServices.downvoteComment(addedComment.id, 1);
 
   expect(result.description).toBe(dummyComment.description);
   expect(result.upvotes).toBe(dummyComment.upvotes);
@@ -220,7 +220,7 @@ test("Downvote comment - nonexistent id", async () => {
     downvotes: 54,
   };
   await commentServices.addComment(dummyComment);
-  const result = await commentServices.downvoteComment(someId);
+  const result = await commentServices.downvoteComment(someId, 1);
 
   expect(result).toBeUndefined();
 });
