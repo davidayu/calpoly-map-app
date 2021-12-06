@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ReactComponent as Close } from "../icons/close.svg";
 import { ReactComponent as ThumbsUp } from "../icons/thumbs-up.svg";
 import { ReactComponent as ThumbsDown } from "../icons/thumbs-down.svg";
 import { ReactComponent as StudyIcon } from "../icons/study.svg";
@@ -9,12 +8,10 @@ import { ReactComponent as DiningIcon } from "../icons/eating.svg";
 import { ReactComponent as GenericIcon } from "../icons/marker.svg";
 import { ReactComponent as MaximizeIcon } from "../icons/maximize.svg";
 import { pinTypesMap } from "../pinTypes.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "../styles/ListView.module.css";
 
 function ListView() {
-  const navigate = useNavigate();
-
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
@@ -127,9 +124,6 @@ function ListView() {
     <div className={style.listView}>
       <div className={style.header}>
         <h2>Locations</h2>
-        {/* <button className={style.iconWrapper} onClick={() => navigate(-1)}>
-          <Close className={style.icon} />
-        </button> */}
       </div>
       <div>
         <div className={style.locations}>
