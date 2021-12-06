@@ -6,8 +6,8 @@ UI prototype (last updated October 25, 2021): https://www.figma.com/file/sQ51YyO
 
 Developer environment setup:
 Install Node.js and run 'npm install -g npm' to install npm on your device. Next, Navigate to https://github.com/davidayu/calpoly-map-app and clone this repo. Navigate to the backend folder using 'cd backend' and run 'npm i'. Add a file to your current directory titled '.env' with the following lines:
-'MONGO_USER="<username>"
-MONGO_PWD="<password>"
+'MONGO_USER="<mongodb_username>"
+MONGO_PWD="<mongodb_password>"
 MONGO_DB="<database_name>"'.
 Next, navigate to the frontend folder from the backend folder using 'cd ../frontend' and run 'npm i'. Add a file to your current directory titled '.env' with the following line:
 'REACT_APP_API_HOST="http://localhost:5000"'.
