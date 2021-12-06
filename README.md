@@ -11,7 +11,7 @@ MONGO_PWD="<mongodb_password>"
 MONGO_DB="<database_name>"'.
 Next, navigate to the frontend folder from the backend folder using 'cd ../frontend' and run 'npm i'. Add a file to your current directory titled '.env' with the following line:
 'REACT_APP_API_HOST="http://localhost:5000"'.
-Navigate to the backend folder using 'cd ../backend' and run 'node backend.js' to run the backend. Open up a separate terminal, navigate to the root directory of the repository, navigate to the frontend folder using 'cd frontend', and run 'npm start'. The app will be launched in your default browser.
+Navigate to the backend folder using 'cd ../backend' and run 'npm start' to run the backend. Open up a separate terminal, navigate to the root directory of the repository, navigate to the frontend folder using 'cd frontend', and run 'npm start'. The app will be launched in your default browser.
 
 Class diagram (last updated October 22, 2021): https://drive.google.com/file/d/1SU9oplYUWC5pPwjIznS2CK1LfgTxi-UB/view?usp=sharing
 
